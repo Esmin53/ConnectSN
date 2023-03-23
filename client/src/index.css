@@ -1,0 +1,117 @@
+:root {
+  --blue: #2d69a1;
+  --blue-dark: #145DA0;
+  --primary-light: #F5F5F5;
+  --secondary-light: #fefefe;
+  --primary-dark: #18191A;
+  --secondary-dark: #242526;
+}
+html {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--primary-dark);
+  max-width: 100vw;
+  min-height: 100vh;
+}
+
+* {
+  font-family: Rubik;
+  margin: 0;
+  padding: 0;
+  max-width: 100vw;
+}
+
+.flex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.fs {
+  display: flex;
+  width: 100%;
+  margin-left: 10%;
+}
+
+.fr {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  margin-top: 0.5rem;
+}
+
+.toggle_button { 
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+    position: absolute;
+}
+
+.popup_container { 
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 99;
+}
+
+input::file-selector-button {
+    width: 100%;
+    height: 2.5rem;
+    color: transparent;
+    background-color: red;
+    border: none;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 0.5rem;
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    z-index: 98;
+}
+
+input::file-selector-button:hover {
+    background-color: #4b4b4b;
+}
+
+#file {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+}
+
+.break_line {
+  width: auto;
+  height: 1px;
+  background-color: #4b4b4b;
+  z-index: 98;
+}
+
+.Link {
+  color: #f3f3f3;
+  text-decoration: none;
+}
+
+.profile_picture {
+    height: 2.5rem;
+    width: 2.5rem;
+    border-radius: 50%;
+    overflow: hidden;
+    background-color: #121213;
+}

@@ -1,0 +1,54 @@
+.friends_page_container {
+    margin: 1rem 13%;
+    padding: 0.5rem 0;
+    width: auto;
+    background-color: var(--secondary-dark);
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.friends_page_header {
+    width: 100%;
+    height: 5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+    color: #f3f3f3;
+    background-color: #383838;
+    margin: 0 0.75rem;
+    position: relative;
+}
+
+.exit_friends_page {
+    position: absolute;
+    color: #f3f3f3;
+    right: 0.5rem;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    background-color: #4b4b4b;
+}
+
+.friends_page_item {
+    width: 47.5%;
+    height: 5rem;
+    background-color: #383838;
+    margin: 0;
+    padding: 0.25rem;
+    display: flex;
+    align-items: center;
+}
+
+.friends_page_profile_picture {
+    height: 100%;
+    width: 5rem;
+    cursor: pointer;
+}
+
+.profile_page_friend_name {
+    margin-left: 0.25rem;
+    color: #f3f3f3;
+}

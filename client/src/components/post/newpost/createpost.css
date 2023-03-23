@@ -1,0 +1,95 @@
+.create_post_container {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 99;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.create_post_form {
+    width: 33rem;
+    height: 35rem;
+    border-radius: 1rem;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    background-color: var(--secondary-dark);
+    padding: 0 1rem;
+    position: relative;
+}
+
+.create_post_header {
+    height: 3rem;
+    color: #fcfcfc;
+}
+
+.create_post_input {
+    width: 100%;
+    margin-top: 1rem;
+    height: 7.5rem;
+    border: none;
+    outline: none;
+    background-color: var(--secondary-dark);
+    font-size: 1.1rem;
+    color: #fcfcfc;
+}
+
+.create_post_image_container {
+    width: 75%;
+    height: 15rem;
+    border: dashed 1px var(--blue-dark);
+    display: flex;
+    justify-content: center;
+}
+
+.create_post_image {
+    height: 100%;
+}
+
+.create_post_button_container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin: 1rem 0;
+}
+
+.button {
+    height: 2.5rem;
+    border-radius: 0.5rem;
+    border: none;
+    font-size: 1rem;
+    color: #fcfcfc;
+    cursor: pointer;
+    overflow: hidden;
+    position: relative;
+}
+
+.create_post_image_button {
+    background-color: #3cb043;
+}
+
+.create_post_submit_button {
+    background-color: var(--blue-dark);
+}
+
+@media only screen and (max-width: 35rem) {
+    .create_post_form {
+        width: 100%;
+        height: 100%;
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    .create_post_image_container {
+        width: 100%;
+        height: 17.5rem;
+    }
+
+    .create_post_button_container {
+        margin-top: 5rem;
+    }
+}

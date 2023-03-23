@@ -1,0 +1,103 @@
+.homepage_container {
+    width: 100%;
+
+    display: flex;
+    justify-content: center;
+    color: #fefefe;
+
+}
+
+.line {
+    flex: 1;
+    height: 1px;
+    background-color: #383838;
+}
+
+.userinfo_container {
+    width: 21rem;
+    height: 25rem;
+    background-color: var(--secondary-dark);
+    margin: 1rem;
+    border-radius: 1rem;
+    position: sticky;
+    top: 5rem;
+}
+
+.userinfo {
+    display: flex;
+    justify-content: space-between;
+    margin: 0.5rem;
+}
+
+.friends {
+    width: 20.5rem;
+    height: 88%;
+    background-color: var(--secondary-dark);
+    border-radius: 1rem;
+    margin: 1rem;
+    position: sticky;
+    top: 5rem;
+    list-style-type: none;
+    padding: 0 0.3rem;
+    z-index: 2;
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+}
+
+.friend {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    color: #f3f3f3;
+    text-decoration: none;
+}
+
+.friend_container {
+    width: 97%;
+    height: 3rem;
+    margin: 0.25rem 0;
+    border-radius: 0.5rem;
+    display: flex;
+    align-items: center;
+    padding: 0 0.25rem;
+    justify-content: space-between;
+    transition: 150ms ease-in-out;
+    cursor: pointer;
+
+}
+
+.friend_container:hover {
+    background-color: #4b4b4b;
+    transition: 150ms ease-in-out;
+}
+
+
+.friend_info {
+    display: flex;
+    margin-left: 0.75rem;
+    gap: 0.25rem;
+}
+
+.add_friend {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    background-color: #383838;
+    font-size: 1.4rem;
+    z-index: 98;
+}
+
+@media only screen and (max-width: 1380px) {
+
+  .userinfo_container {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+    .post {
+        width: 100%;
+        margin: 0.5rem 0;
+        border-radius: 0;
+  }
+}
+
