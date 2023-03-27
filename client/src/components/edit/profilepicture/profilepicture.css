@@ -1,16 +1,14 @@
 .add_profile_picture_container {
     width: 100vw;
     height: 100vh;
-    background: rgba(0, 0, 0, 0.5);
     position: fixed;
     top: 0;
     left: 0;
-    z-index: 99;
+    z-index: 100;
 }
 
 .add_profile_picture {
     width: 25rem;
-    min-height: 27rem;
     border-radius: 1rem;
     border: solid 1.5px #383838;
     background-color: var(--secondary-dark);
@@ -25,19 +23,21 @@
     border-bottom: solid 1px #4b4b4b;
     width: 98%;
     height: 3rem;
+    font-size: clamp(1rem, 3vw, 1.5rem);
 }
 
 .profile_picture_area {
     width: 95%;
-    flex: 1;
+    height: clamp(10rem, 65vw, 16rem);
     margin: 1rem 0;
     border-radius: 0.5rem;
     border: dashed 1px var(--blue-dark);
 }
 
 .profile_picture_preview {
-    width: 100%;
-    max-height: 17.25rem;
+    width: 99%;
+    height: 99%;
+    max-height: 15.75rem;
     object-fit: cover;
     border-radius: 0.5rem;
     border: none;
@@ -53,6 +53,7 @@
     font-size: 1rem;
     cursor: pointer;
     background-color: var(--blue-dark);
+    font-size: clamp(0.85rem, 3vw, 1rem);
 }
 
 .add_profile_picture > button:hover {
@@ -65,11 +66,11 @@
     top: 0.5rem;
     width: 2rem;
     height: 2rem;
-    font-size: 1.3rem;
     background-color: #4b4b4b;
     border-radius: 50%;
     color: #fefefe;
     cursor: pointer;
+    font-size: clamp(0.85rem, 3vw, 1.3rem);
 }
 
 .add_picture_input {
@@ -82,6 +83,7 @@
     align-items: center;
     cursor: pointer;
     z-index: 6;
+    font-size: clamp(0.85rem, 3vw, 1.3rem);
 }
 
 .profile_picture_file_input {
@@ -91,7 +93,7 @@
     border: none;
     margin: 0rem 0;
     color: #fefefe;
-    font-size: 1rem;
+    font-size: clamp(0.85rem, 3vw, 1.3rem);
     cursor: pointer;
     background-color: #383838;
     overflow: hidden;

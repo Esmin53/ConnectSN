@@ -1,8 +1,7 @@
 .homepage_container {
     width: 100%;
-
     display: flex;
-    justify-content: center;
+    justify-content: space-evenly;
     color: #fefefe;
 
 }
@@ -20,7 +19,8 @@
     margin: 1rem;
     border-radius: 1rem;
     position: sticky;
-    top: 5rem;
+    top: 4rem;
+    font-size: clamp(0.9rem, 1vw, 1rem);
 }
 
 .userinfo {
@@ -31,7 +31,7 @@
 
 .friends {
     width: 20.5rem;
-    height: 88%;
+    height: 88vh;
     background-color: var(--secondary-dark);
     border-radius: 1rem;
     margin: 1rem;
@@ -86,18 +86,24 @@
     z-index: 98;
 }
 
-@media only screen and (max-width: 1380px) {
+@media only screen and (max-width: 1400px) {
+    .homepage_container {
+        justify-content: center;
+    }
 
   .userinfo_container {
     display: none;
   }
+  .friends {
+    width: 30vw;
+    min-width: 21rem;
+  }
+
 }
 
-@media only screen and (max-width: 600px) {
-    .post {
-        width: 100%;
-        margin: 0.5rem 0;
-        border-radius: 0;
+@media only screen and (max-width: 1046px) {
+  .friends {
+    display: none;
   }
 }
 

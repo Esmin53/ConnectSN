@@ -48,32 +48,26 @@ const Profilepagetop = () => {
   }
   
   return (
-        <div className='profile_page_container'>
-          
+    <div className='profile_page_container'>    
       <div className='profile_page_top'>
         <div className='background'>
-          {user.backgroundImage && <img src={user.backgroundImage} className="background_image"/>}
-          
+          {user.backgroundImage ? <img src={user.backgroundImage} className="background_image"/> : <div className='background_image'></div>}    
           {userId === currentUser.user._id && <button className='add_background'>
-        <MdPhotoCamera /> <Background />
-        <p style={{fontSize: "1rem"}} id="add_background_text">New background image</p>
-    </button>}
-        </div>
-        <div className='profile_page_info'>
-          <div style={{position: "relative"}}>
-            <img className='main_profile_picture' src={user.profilePicture} />
-            {userId === currentUser.user._id && <div className='new_profile_picture'>
-              <Profilepicture />
-              <MdPhotoCamera />
-          </div>}
-          </div>
-          <div className='profile_info_flex'>
-            <div>
-              <h4>{user.firstName} {user.lastName}</h4>
-              <p id="display_none">501 friends</p>
-            </div>
+            <MdPhotoCamera /> <Background />
+            <p style={{fontSize: "1rem"}} id="add_background_text">New background image</p>
+          </button>} 
+          <div className='profile_page_info'>
+            <div className='main_profile_picture_container'>
+              <img className='main_profile_picture' src={user.profilePicture} />
+              {userId === currentUser.user._id && <div className='new_profile_picture'>
+                <Profilepicture />  <MdPhotoCamera />
+              </div>}
+            </div>            
+            <div className='profile_info_flex'>
+              <p style={{fontSize: "clamp(0.9rem, 5vw, 2rem)"}}>{user.firstName} {user.lastName}</p>    
               {userId === currentUser.user._id ? <Personalinfo /> : <button className='edit_profile_button'> Friends </button>}
-          </div>
+            </div>
+          </div>  
         </div>
       </div>
     </div>

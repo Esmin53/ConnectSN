@@ -47,7 +47,7 @@ const Profilepagemain = () => {
             <Friends friends={user.friends}/>
         </div>
         <div className='profile_main_right'>
-            {userId === currentUser.user._id && <Newpost />}
+            {userId === currentUser.user._id ? <Newpost /> : <div className='newpost_placeholder center'> <p>Posts</p> </div>}
             <Posts userId={userId}/>
         </div>
     </div>

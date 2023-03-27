@@ -2,6 +2,19 @@ const User = require("../models/User");
 
 // READ (GET) CONTROLLERS
 
+const search = async (req, res) => {
+    try {
+    
+        const user = await User.find({
+            "firstName": {  $regex: req.query.u, $options: 'i' },
+        })
+
+        res.status(200).json(user)
+    } catch (error) {
+        res.status(400).json({ msg: error })
+    }
+}
+
 const getRequests = async (req, res) => {
     try {
         const {array} = req.body;
@@ -42,9 +55,10 @@ const searchUsers = async (req, res) => {
 const getUserLight = async (req, res) => {
     try {
          const {userId} = req.params;
+  
 
-        const user = await User.findById({_id: userId});
-
+        const user = await User.findById({_id: userId}); 
+ 
         res.status(200).json({
             firstName: user.firstName,
             lastName: user.lastName,
@@ -53,6 +67,7 @@ const getUserLight = async (req, res) => {
         })
 
     } catch (error) {
+        console.log(error)
         res.status(400).json({ msg: error})
     }
 }
@@ -203,6 +218,6 @@ const getFriends = async (req, res) => {
     }
 }
 
-module.exports = {sendRemoveRequest, acceptDeclineRequest, removeFriend,
+module.exports = {search, sendRemoveRequest, acceptDeclineRequest, removeFriend,
                  getUser, searchUsers, getAllUsers, getRequests, getFriends, updateUser,
                 getUserLight};

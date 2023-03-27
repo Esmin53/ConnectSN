@@ -74,7 +74,7 @@ const Profilepicture = () => {
             </div>
             <p className='close_profile_picture center'
             onClick={() => setProfilePicture(false)}><AiOutlineArrowLeft /></p>
-            <div className='profile_picture_area'>
+            <div className='profile_picture_area center'>
                 {<img src={url} className="profile_picture_preview"/>}
             </div>
             <div className='profile_picture_file_input center'>

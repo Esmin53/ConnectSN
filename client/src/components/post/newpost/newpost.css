@@ -1,23 +1,26 @@
 .newpost_container {
-    width: 40rem;
+    width: 40.5rem;
     background-color: var(--secondary-dark);
     border-radius: 1rem;
     margin: 1rem;
     box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
     padding-bottom: 0.25rem;
-    padding-left: 0.5rem;
+
+}
+#newpost_profile_picture {
+  margin-left: 0.5rem;
 }
 
 .post_input {
     flex: 1;
-    height: 2rem;
+    min-height: 1.8rem;
     border-radius: 1.5rem;
     border: none;
     background-color: #4b4b4b;
-    color: #fefefe;
-    font-size: 1rem;
+    color: #fef3fe;
+    font-size: clamp(0.6rem, 6vw, 1rem);
     padding-left: 0.5rem;
-    padding-top: 0.5rem;
+    padding-top: 0.7rem;
     margin-right: 0.75rem;
     cursor: pointer;
 }
@@ -37,7 +40,7 @@
 }
 
 .post_image_button {
-    width: 97.5%;
+    flex: 1;
     height: 2.5rem;
     border-radius: 1rem;
     background-color: var(--blue-dark);
@@ -50,7 +53,8 @@
     cursor: pointer;
     gap: 0.5rem;
     position: relative;
-    margin-left: -0.5rem;
+    margin: 0 0.5rem;
+
 }
 
 .post_image_button:hover {
@@ -59,10 +63,33 @@
 
 @media only screen and (max-width: 670px) {
   .newpost_container{
-    width: 100vw;
+    width: 100%;
+    max-width: 100%;
     margin: 0.5rem 0;
-    padding-left: 0.25rem;
-    padding-right: 0.25rem;
     border-radius: 0;
-  } 
+   } 
+
+  .post_image_button {
+    width: 95vw;
+  }
+}
+
+@media only screen and (max-width: 312px) {
+    .post_input {
+        min-height: 1.5rem;
+        font-size: 0.9rem;
+        margin: 0.25rem 0;
+        padding-top: 0.5rem;
+    }
+      .newpost_container {
+        padding: 0;
+      }
+      .newpost_flex {
+        padding: 0 ;
+      }
+      .post_image_button {
+        height: 2rem;
+        margin: 0.25rem 0;
+        font-size: clamp(0.6rem, 5vw, 0.85rem)
+      }
 }

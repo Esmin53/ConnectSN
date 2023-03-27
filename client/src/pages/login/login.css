@@ -14,7 +14,9 @@
 
 .form_image {
     height: 100%;
-    width: 32.5rem;
+    max-width: 32.5rem;
+    min-width: 25rem;
+    width: 35vw;
 }
 
 .login_form {
@@ -93,7 +95,7 @@
     font-weight: 500;
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 800px) {
   .form_image {
     display: none;
   }
@@ -104,4 +106,18 @@
   .login_form {
     border: none;
   }
+
+  .register_form {
+    border: none;
+   } 
+}
+
+@media only screen and (max-width: 300px) {
+   .login_form {
+    padding: 0;
+   }
+
+   .form_button {
+    width: 95%;
+   }
 }

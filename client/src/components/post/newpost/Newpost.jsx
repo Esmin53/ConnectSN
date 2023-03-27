@@ -62,7 +62,7 @@ const Newpost = () => {
     <>
     <div className="newpost_container" onClick={() => setIsOpen(true)}>
       <div className="newpost_flex">
-          <img className="profile_picture" src={currentUser.user.profilePicture} alt={currentUser.user.firstName}/>
+          <img className="profile_picture" src={currentUser.user.profilePicture} alt={currentUser.user.firstName} id="newpost_profile_picture"/>
         <div className="post_input"> What's on your mind?</div>
       </div>
       <div className='line'></div>

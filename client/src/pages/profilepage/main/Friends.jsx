@@ -39,12 +39,13 @@ const Friends = () => {
         </div>
         <div className='profile_friends'>
             {friends?.map((item, index) => {
-              return <div >  
+              if(index === 9) return
+              return <div key={index}>  
                   <img src={item.profilePicture} className='profile_friend' />
                 <p className='profile_friend_name'>{item.firstName} {item.lastName}</p>
               </div>
-            })}
-          </div>
+            })}                   
+         </div>
     </div>
   )
 }

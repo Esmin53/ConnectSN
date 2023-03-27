@@ -81,6 +81,23 @@ const likePost = async (req, res) => {
     }
 }
 
+const comment = async (req, res) => {
+    try {
+        const {postId} = req.params;
+
+        const post = await Post.findById(postId)
+        let newCommentsArray = post.comments
+        newCommentsArray.push(req.body)
+
+        post.save()
+        
+        res.status(200).json(post.comments)
+    } catch (error) {
+        console.log(error)
+        res.status(400).json({ msg: error})   
+    }
+}
+
 // DELETE CONTROLLERS
 const deletePost = async (req, res) => {
     try {
@@ -106,4 +123,4 @@ const deletePost = async (req, res) => {
 
 
 
-module.exports = { newPost, getAllPosts, getUsersPosts, getHomepage, likePost, deletePost }
+module.exports = { newPost, getAllPosts, getUsersPosts, getHomepage, likePost, comment, deletePost }

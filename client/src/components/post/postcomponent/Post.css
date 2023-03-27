@@ -1,6 +1,6 @@
 .post_container {
     width: 40.5rem;
-    min-height: 25rem;
+    min-height: 20rem;
     background-color: var(--secondary-dark);
     display: flex;
     flex-direction: column;
@@ -8,6 +8,7 @@
     box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
     border-radius: 1rem;
     overflow: hidden;
+    font-size: clamp(0.9rem, 1vw, 1rem);
 }
 
 .post_header {
@@ -70,9 +71,15 @@
     padding: 0.5rem;
 }
 
+.post_likes_comments_flex {
+    display: flex;
+    justify-content: space-between;
+}
+
+
 #post_likes {
     margin-bottom: 0.5rem;
-    font-size: 1.05rem;
+    font-size: clamp(0.85rem, 5vw ,1.05rem);
     display: flex;
     align-items: center;
     gap: 0.25rem;
@@ -81,7 +88,7 @@
 .post_options {
     display: flex;
     justify-content: space-evenly;
-    margin-top: 0.25rem;
+    margin: 0.25rem 0;
 }
 
 .post_option {
@@ -90,6 +97,7 @@
     border-radius: 0.5rem;
     cursor: pointer;
     gap: 0.25rem;
+    font-size: clamp(0.85rem, 5vw ,1.05rem);
 }
 
 .post_option:hover {
@@ -97,11 +105,55 @@
     transition: 150ms ease-in-out;
 }
 
+.post_new_comment {
+    width: 98%;
+    display: flex;
+    padding: 0 1%;
+    margin: 0.5rem 0;
+}
+
+.post_new_comment_input {
+    flex: 1;
+    height: 1.75rem;
+    padding-top: 0.75rem;
+    margin-left: 0.5rem;
+    padding-left: 0.5rem;
+    border-radius: 1.5rem;
+    border: none;
+    background-color: #4b4b4b;
+    color: #f3f3f3;
+}
+
+.post_new_comment_input::placeholder {
+    color: #7a7676;
+    font-weight: 600;
+}
+
+.post_new_comment_input:focus {
+    outline: none;
+    box-shadow: 0 0 3px #f3f3f3;
+}
+
+.post_new_comment_error {
+    box-shadow: 0 0 3px #e60026;
+}
+
 @media only screen and (max-width: 670px) {
     .post_container {
-        width: 100vw;
+        width: 100%;
         border-radius: 0;
         padding: 0;
         margin: 1rem 0;
+    }
+    .post_header {
+        margin-right: 0.5rem;
+        padding-left: 0.5rem;
+    }
+  }
+
+  @media only screen and (max-width: 312px) {
+    .post_new_comment_input {
+        height: 1.5rem;
+        padding-top: 0.5rem;
     }
   }

@@ -10,7 +10,6 @@
 
 .add_background_image {
     width: 38rem;
-    min-height: 27rem;
     background-color: var(--secondary-dark);
     flex-direction: column;
     border-radius: 0.5rem;
@@ -23,11 +22,12 @@
     border-bottom: solid 1px #4b4b4b;
     width: 98%;
     margin-top: 0.5rem;
+    font-size: clamp(1rem, 3vw, 1.3rem);
 }
 
 .background_image_area {
     width: 95%;
-    flex: 1;
+    height: clamp(7.5rem, 50vw, 17rem);
     border: dashed 1.5px var(--blue-dark);
     margin: 1rem 0;
 }
@@ -50,7 +50,7 @@
     height: 2.5rem;
     border-radius: 0.5rem;
     border: none;
-    font-size: 1rem;
+    font-size: clamp(0.85rem, 3vw, 1.3rem);
     color: #fefefe;
 }
 
@@ -58,6 +58,7 @@
     background-color: rgb(210, 50, 50);
     margin-left: 0.5rem;
     cursor: pointer;
+    font-size: clamp(0.85rem, 3vw, 1.3rem);
 }
 
 #ri_button:hover {
@@ -70,7 +71,7 @@
     border-radius: 0.5rem;
     border: none;
     background-color: var(--blue-dark);
-    font-size: 1rem;
+    font-size: clamp(0.85rem, 3vw, 1.3rem);
     color: #fefefe;
     margin: 0.5rem 0;
     cursor: pointer;
@@ -85,7 +86,7 @@
     background-color: #383838;
     height: 2.5rem;
     border-radius: 0.5rem;
-    font-size: 1rem;
+    font-size: clamp(0.7rem, 3vw, 1.3rem);
     color: #fefefe;
     overflow: hidden;
     position: relative;

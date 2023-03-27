@@ -6,6 +6,7 @@ import Userinfo from './Userinfo'
 import Posts from './Posts';
 import Friends from './Friends';
 import Newpost from "../../components/post/newpost/Newpost"
+import Recommend from '../../components/recommendFriends/Recommend';
 
 const Homepage = () => {
     const currentUser = useSelector(state => state)
@@ -17,6 +18,7 @@ const Homepage = () => {
         <Userinfo />
         <div className='homepage_posts'>
           <Newpost />
+          <Recommend />
           <Posts />
         </div>
         <Friends />

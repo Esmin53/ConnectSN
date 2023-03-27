@@ -1,19 +1,22 @@
 import React, { useEffect, useState } from 'react';
 import "./navbar.css";
-import {AiFillHome} from "react-icons/ai";
-import {FaBell, FaUserAstronaut, FaUserClock} from "react-icons/fa";
-import {BiUserPlus, BiUserMinus} from "react-icons/bi"
+import {AiFillHome, AiOutlineSearch} from "react-icons/ai";
+import {FaBell, FaUserAstronaut} from "react-icons/fa";
 import {IoSettingsSharp} from "react-icons/io5";
 import { Navigate, useNavigate, Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { logout, updateFriends, updateRequsets } from '../redux/rootSlice';
 import axios from 'axios';
+import Search from './search/Search';
 
 const Navbar = () => {
     const currentUser = useSelector(state => state)
     const [openSettings, setOpenSettings] = useState(false);
     const [openRequests, setOpenRequests] = useState(false);
     const [requests, setRequests] = useState([]); 
+   
+    let focused = "search_focused"
+    let unFocused = "search"
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
@@ -21,7 +24,6 @@ const Navbar = () => {
         navigate("/");
         dispatch(logout());
     }
-
     
     const getRequests = async () => {
         try {
@@ -70,7 +72,11 @@ const Navbar = () => {
 
   return (
     <div className='navbar_container'>
-        <h2 className='logo'>Connect</h2>    
+        <div className='navbar_left'>
+            <h2 className='logo'>Connect</h2>
+            
+        </div>
+            
         <ul className='navbar_right'>
             <Link to="/home" className='center navbar_icon'>
                 <AiFillHome />
@@ -83,7 +89,7 @@ const Navbar = () => {
                     setOpenRequests(prev => !openRequests)
                 }}>
                 <FaBell  />
-                {openRequests && <ul className='dropdown'>
+                {openRequests && <ul className='dropdown' id='requests_dropdown'>
                     {requests.map((item, index) => {
                         return <li className='navbar_request' key={index}>
                         <div className='profile_picture_container'>

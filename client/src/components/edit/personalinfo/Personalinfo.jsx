@@ -54,6 +54,10 @@ const Personalinfo = () => {
         }
     }
 
+    const handleSubmit = (e) => {
+      e.preventDefault()
+    }
+
   return (
     <>
     <button className='edit_profile_button' onClick={() => setIsOpen(true)}>
@@ -63,7 +67,7 @@ const Personalinfo = () => {
     {isOpen && <div className='personal_info_container'>
           
         {isLoading && <Loading />}
-        <form className='personal_info_form' onSubmit="action">
+        <form className='personal_info_form' onSubmit={handleSubmit}>
           <p className='close_profile_picture center'
             onClick={() => setIsOpen(false)}><AiOutlineArrowLeft />
           </p>
