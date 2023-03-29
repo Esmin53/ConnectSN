@@ -1,17 +1,22 @@
-import React, { useState } from 'react'
-import "./personalinfo.css"
-import { useSelector, useDispatch } from 'react-redux'
-import {BiRefresh} from "react-icons/bi"
-import { AiOutlineArrowLeft } from 'react-icons/ai'
-import axios from 'axios'
-import Loading from '../../loading/Loading'
-import {FaTrash} from "react-icons/fa"
-import Userinfo from '../../../pages/homepage/Userinfo'
+import React, { useState } from 'react';
+import "./personalinfo.css";
+import { useSelector, useDispatch } from 'react-redux';
+import {BiRefresh} from "react-icons/bi";
+import { AiOutlineArrowLeft } from 'react-icons/ai';
+import axios from 'axios';
+import Loading from '../../loading/Loading';
+import {FaTrash} from "react-icons/fa";
+import Userinfo from '../../../pages/homepage/Userinfo';
+import { updateUserInfo } from '../../../redux/rootSlice';
+import { useLocation } from 'react-router-dom';
 
 const Personalinfo = () => {
-  const currentUser = useSelector(state => state)
-  const [isOpen, setIsOpen] = useState(false)
-  const [isLoading, setIsLoading] = useState(false)
+  const currentUser = useSelector(state => state);
+  const dispatch = useDispatch();
+  const [isOpen, setIsOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const path = useLocation()
+  const page = path.pathname.split("/")[1]
   const [userInfo, setUserInfo] = useState({
     firstName: currentUser.user.firstName,
     lastName: currentUser.user.lastName,
@@ -20,7 +25,7 @@ const Personalinfo = () => {
     instagram: currentUser.user.instagram,
     facebook: currentUser.user.facebook,
     linkedin: currentUser.user.linkedin
-  })
+  });
   
   const handleChange = (e) => {
     const value = e.target.value
@@ -30,13 +35,15 @@ const Personalinfo = () => {
     })
   }
 
+  console.log(page)
+
   const updateUser = async (e) => {
       e.preventDefault()
       setIsLoading(true)  
       try {
         const res = await axios.patch("http://localhost:3001/api/v1/user/update", 
           {
-             firstName: userInfo.firstName,
+              firstName: userInfo.firstName,
               lastName: userInfo.lastName,
               location: userInfo.location,
               occupation: userInfo.occupation,
@@ -48,7 +55,9 @@ const Personalinfo = () => {
             }
           }
         )
+        dispatch(updateUserInfo(res.data))
         setIsLoading(false)
+        
         } catch (error) {
             console.log(error)
         }
@@ -60,7 +69,8 @@ const Personalinfo = () => {
 
   return (
     <>
-    <button className='edit_profile_button' onClick={() => setIsOpen(true)}>
+    <button className='edit_profile_button' onClick={() => setIsOpen(true)}
+    style={{"backgroundColor": `${page === 'home' ? "#145DA0" : "#383838"}`}}>
       Edit profile
     </button>
 

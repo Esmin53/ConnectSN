@@ -72,6 +72,22 @@ const getUserLight = async (req, res) => {
     }
 }
 
+const getRecommendedUsers = async (req, res) => {
+    try {
+        const {location, occupation, id} = req.query;
+
+        const locationRecommendation = await User.find({ location: location}).select(['-posts', '-email', '-password', '-background', '-sentRequests', '-occupation'])
+        const occupationRecommendation = await User.find({ occupation: occupation}).select(['-posts', '-email', '-password', '-background', '-sentRequests', '-location'])
+        let usersArray = [...locationRecommendation, ...occupationRecommendation];
+        usersArray = usersArray.filter((item) => item._id != id && !item?.friends.includes(id) && !item.recievedRequests.includes(id))
+
+        res.status(200).json(usersArray)
+    } catch (error) {
+        console.log(error)
+        res.status(400).json({ msg: error})
+    }
+}
+
 // CREATE (POST) CONTROLLERS
 const sendRemoveRequest = async (req, res) => {
     try {
@@ -155,10 +171,12 @@ const updateUser = async (req, res) => {
     try {
         const {userId} = req.user;
 
-        const user = await User.findByIdAndUpdate(userId, {...req.body}, {new: true});
+        const user = await User.findByIdAndUpdate(userId, {...req.body}, {new: true}).select(['-password', '-email', '-createdAt', '-posts', 
+        '-sentRequests', '-recievedRequests']);
 
         res.status(200).json(user)
     } catch (error) {
+        console.log(error)
         res.status(400).json(error)
     }
 }
@@ -184,7 +202,7 @@ const removeFriend = async (req, res) => {
         await user.save();
         await friend.save();
         
-        res.status(200).json("Sucess");
+        res.status(200).json(user.friends);
     } catch (error) {
         return res.status(401).json({ msg: error.message });
     }
@@ -220,4 +238,4 @@ const getFriends = async (req, res) => {
 
 module.exports = {search, sendRemoveRequest, acceptDeclineRequest, removeFriend,
                  getUser, searchUsers, getAllUsers, getRequests, getFriends, updateUser,
-                getUserLight};
+                getUserLight, getRecommendedUsers};

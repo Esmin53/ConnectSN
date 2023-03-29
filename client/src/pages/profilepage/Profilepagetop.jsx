@@ -12,11 +12,9 @@ const Profilepagetop = () => {
   const location = useLocation()
   const userId = location.pathname.split("/")[2]
   const currentUser = useSelector(state => state)
-  const [user, setUser] = useState()
+  const [user, setUser] = useState(null)
   const [isFetching, setIsFetching] = useState(true)
   
-
-
   const getUser = async () => {
     setIsFetching(true)
     try {
@@ -34,9 +32,9 @@ const Profilepagetop = () => {
   
   useEffect(() => {
     getUser()
-  }, [currentUser.user])
+  }, [])
   
-  if(isFetching) {
+  if(isFetching && !user) {
     return <div className='profile_page_container'>
       <div className='profile_page_top'>
         <div className='background'></div>
@@ -51,7 +49,7 @@ const Profilepagetop = () => {
     <div className='profile_page_container'>    
       <div className='profile_page_top'>
         <div className='background'>
-          {user.backgroundImage ? <img src={user.backgroundImage} className="background_image"/> : <div className='background_image'></div>}    
+          {user?.backgroundImage ? <img src={user?.backgroundImage} className="background_image"/> : <div className='background_image'></div>}    
           {userId === currentUser.user._id && <button className='add_background'>
             <MdPhotoCamera /> <Background />
             <p style={{fontSize: "1rem"}} id="add_background_text">New background image</p>
@@ -65,7 +63,12 @@ const Profilepagetop = () => {
             </div>            
             <div className='profile_info_flex'>
               <p style={{fontSize: "clamp(0.9rem, 5vw, 2rem)"}}>{user.firstName} {user.lastName}</p>    
-              {userId === currentUser.user._id ? <Personalinfo /> : <button className='edit_profile_button'> Friends </button>}
+              {userId === currentUser?.user?._id && <Personalinfo />}
+              {userId !== currentUser?.user?._id && <div> 
+                {currentUser.user.friends.includes(userId) ? 
+                <button className='edit_profile_button'>Friends</button> : 
+                <button className='edit_profile_button'>Send request</button>}  
+              </div>}
             </div>
           </div>  
         </div>

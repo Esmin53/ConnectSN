@@ -33,7 +33,7 @@ const Profilepagemain = () => {
   
   useEffect(() => {
     getUser()
-  }, [])
+  }, [currentUser.user])
   
   if(isFetching) {
     return <div className='profile_page_main'></div>

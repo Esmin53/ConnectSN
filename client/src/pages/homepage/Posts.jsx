@@ -27,8 +27,8 @@ const Posts = () => {
     getPosts()
   }, [])
 
-  const array = allPosts?.map((item) => {
-    return <Post {...item} />
+  const array = allPosts?.map((item, index) => {
+    return <Post key={index} {...item} />
   })
 
   return (

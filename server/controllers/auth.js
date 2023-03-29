@@ -34,7 +34,7 @@ const login = async (req, res) => {
 
         const data = {...user._doc};
         delete data.password;
-        res.status(200).json({  data, token });
+        return res.status(200).json({ data, token });
     } catch (error) {
         res.status(400).json({ msg: error.message });
     }

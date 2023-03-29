@@ -95,21 +95,6 @@
     margin-right: 2rem;
 }
 
-.edit_profile_button {
-    min-width: 8rem;
-    height: 2rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1rem;
-    cursor: pointer;
-    background-color: #4b4b4b;
-    border: none;
-    border-radius: 0.5rem;
-    color: #fefefe;
-    overflow: hidden;
-}
-
 
 .profile_main_left {
     display: flex;
@@ -174,11 +159,6 @@
         gap: 1rem;
         margin: 0;
         margin-left: 2rem;
-    }
-
-    .edit_profile_button {
-        height: 1.5rem;
-        margin-right: 1rem;
     }
 
     .profile_page_info {

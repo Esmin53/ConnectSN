@@ -23,12 +23,13 @@ const Navbar = () => {
     const handleLogout = () => {
         navigate("/");
         dispatch(logout());
+        localStorage.clear()
     }
     
     const getRequests = async () => {
         try {
             const res = await axios.post("http://localhost:3001/api/v1/user/getRequests", {
-                array: currentUser.user.recievedRequests
+                array: currentUser?.user?.recievedRequests
             }, {
                 headers: {
                     Authorization: `Bearer ${currentUser.token}`
@@ -64,7 +65,7 @@ const Navbar = () => {
 
     useEffect(() => {
         getRequests();
-    }, [currentUser.user.recievedRequests])
+    }, [currentUser?.user?.recievedRequests])
 
     if(!currentUser.user) {
         return <Navigate to="/"/>

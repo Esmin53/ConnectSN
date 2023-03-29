@@ -36,11 +36,15 @@ export const rootSlice = createSlice({
         },
         updateProfilePicture: (state, action) => {
             state.user.profilePicture = action.payload
+        }, updateUserInfo: (state, action) => {
+            const {occupation, location, firstName, lastName, facebook, instagram} = action.payload
+            state.user = {...state.user, location, firstName,
+            occupation, lastName, facebook, instagram}
         }
     }
 });
 
 export const { login, logout, updateFriends, updateRequsets, updateSentRequests, 
-    updateBackground, updateProfilePicture }  = rootSlice.actions;
+    updateBackground, updateProfilePicture, updateUserInfo }  = rootSlice.actions;
 
 export default rootSlice.reducer;

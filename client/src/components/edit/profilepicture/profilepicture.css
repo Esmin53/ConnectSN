@@ -71,6 +71,7 @@
     color: #fefefe;
     cursor: pointer;
     font-size: clamp(0.85rem, 3vw, 1.3rem);
+    z-index: 98;
 }
 
 .add_picture_input {

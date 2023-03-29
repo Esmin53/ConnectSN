@@ -8,9 +8,7 @@ import { Link } from 'react-router-dom'
 const Comments = ({comments}) => {
     const currentUser = useSelector(state => state)
     const [showComments, setShowComments] = useState(false)  
-
-    console.log(comments)
-
+    
     return (
     <div>
          {comments[0] && <div className="comment" >
