@@ -32,8 +32,8 @@ const Friends = () => {
     <div className='profile_friends_container'>
         <div className='profile_friends_header'>
           <div>
-            <h2>Friends</h2>
-            <p>501 friends</p>
+            <h2 id="profile_header_friends">Friends</h2>
+            <p id='profile_header_p'>{currentUser?.user?.friends?.length} friend{currentUser?.user?.friends?.length > 1 && "s"}</p>
           </div>
           <Link to={`/friends/${userId}`} className='friends_button center'>See all friends</Link>
         </div>

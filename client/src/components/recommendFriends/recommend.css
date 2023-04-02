@@ -17,6 +17,12 @@
     border: none;
     font-size: 1rem;
     color: #f3fef3;
+    transition: 150ms ease-in-out;
+}
+
+.scroll_button:hover {
+    background-color: #7a7676;
+    transition: 150ms ease-in-out;
 }
 
 .sb-l {
@@ -47,6 +53,10 @@
     height: 0;
 }
 
+.recommend_friends_container::scrollbar {
+    height: 0;
+}
+
 .friend_recomendation {
     height: 95%;
     width: 11rem;
@@ -60,11 +70,10 @@
     color: #f3fef3;
     text-decoration: none;
     cursor: pointer;
-    z-index: 97;
 }
 
 .friend_recomendation > p {
-    font-size: clamp(0.3rem, 4vw, 1rem);
+    font-size: clamp(0.5rem, 4vw, 1rem);
 }
 
 .recommended_profile_picture {
@@ -86,7 +95,7 @@
     transition: 250ms ease-in-out;
     font-size: clamp(0.65rem, 4vw, 1.1rem);
     gap: 0.15rem;
-    z-index: 98;
+    z-index: 97;
 }
 
 .add_recomendation:hover {
@@ -132,7 +141,7 @@
     }
 
     .friend_recomendation {
-        width: 100vw;
+
         min-width: 9rem;
     }
 
@@ -141,8 +150,9 @@
     }
 
     .scroll_button {
-        width: clamp(2rem, 7.5vw, 2.5rem);
-        height: clamp(2rem, 7.5vw, 2.5rem);
+        width: clamp(2rem, 7.5vw, 2rem);
+        height: clamp(2rem, 7.5vw, 2rem);
+        max-width: 2.5rem;
     }
     
 

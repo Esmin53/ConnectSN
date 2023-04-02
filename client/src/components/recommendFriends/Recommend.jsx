@@ -1,20 +1,21 @@
 import React, { useEffect, useRef, useState } from 'react'
 import "./recommend.css"
-import {FaUserPlus} from "react-icons/fa"
+import {FaUserClock, FaUserPlus} from "react-icons/fa"
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from 'react-icons/ai'
 import axios from 'axios'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import {MdHome, MdWork} from "react-icons/md"
-import { updateSentRequests } from '../../redux/rootSlice'
+import { updateFriends, updateRequsets, updateSentRequests } from '../../redux/rootSlice'
 import Personalinfo from '../edit/personalinfo/Personalinfo'
 
 const Recommend = () => {
   const currentUser = useSelector(state => state)
   const [users, setUsers] = useState()
   const dispatch = useDispatch()
-  const url = `http://localhost:3001/api/v1/user/recomendations?occupation=${'Web Developer'}&location=${currentUser.user.location}&&id=${currentUser.user._id}`
-      const getRecomendations = async () => {
+  const url = `http://localhost:3001/api/v1/user/recomendations?occupation=${currentUser?.user?.occupation}&location=${currentUser.user.location}&&id=${currentUser.user._id}`
+      
+    const getRecomendations = async () => {
         try {
           const res = await axios.get(url,  {
             headers: {
@@ -43,6 +44,24 @@ const Recommend = () => {
         }
       }
 
+      const responseRequest = async (id) => {
+        try {
+            const res = await axios.post("http://localhost:3001/api/v1/user/answerRequest", {
+                friendId: id,
+                response: true
+            }, {
+                headers: {
+                    Authorization: `Bearer ${currentUser.token}`
+                }
+            })
+            dispatch(updateFriends(res.data.friends))
+            dispatch(updateRequsets(res.data.recievedRequests))
+            //getRequests();
+        } catch (error) {
+           console.log(error.response.data)
+        }
+    }
+
     useEffect(() => {
         getRecomendations()
     }, [currentUser.user])
@@ -59,10 +78,10 @@ const Recommend = () => {
     
   
     return ( 
-    <div className='scroll_container'>
-      {!users?.length === 0 && <button className='scroll_button sb-l center'
+    <div className='scroll_container' style={{zIndex: "5"}}>
+      {!users?.length == 0 && <button className='scroll_button sb-l center'
       onClick={slideLeft}><AiOutlineArrowLeft /></button>}
-      {!users?.length === 0 && <button className='scroll_button sb-r center'
+      {!users?.length == 0 && <button className='scroll_button sb-r center'
       onClick={slideRight}><AiOutlineArrowRight /></button>}
     <div className='recommend_friends_container' id="scroll_conatiner">
       
@@ -72,13 +91,20 @@ const Recommend = () => {
             <p>{item.firstName} {item.lastName}</p>
             {item.occupation && <p className="center"><MdWork />: {item.occupation}</p>}
             {item.location && <p className="center"><MdHome />: {item.location}</p>}
-            <button className='add_recomendation center'
-            onClick={() => addFriend(item._id)}>Add Friend <FaUserPlus /></button>
+            {!currentUser?.user?.recievedRequests?.includes(item._id) ? 
+            <button className='add_recomendation center'onClick={() => addFriend(item._id)}>
+              Add Friend <FaUserPlus /></button> : 
+              <button className='add_recomendation center'
+              onClick={() => {responseRequest(item._id)}}>
+                Accept <FaUserClock />  
+              </button>}
         </div> 
         })}
         {users?.length === 0 && <div className='empty_recomended_message'>
-          <p>Tell us more about yourself, and help us recommend you some new friends!</p>
-          <Personalinfo />
+         {!currentUser.user.location || !currentUser?.user?.occupation ? 
+         <div className='empty_recomended_message'><p>Tell us more about yourself, and help us recommend you some new friends!</p> 
+         <Personalinfo /> </div>: 
+         <p>No friend recomendations at the moment! Try adding some friends first!</p>}
           </div>}
     </div>
     </div>

@@ -23,6 +23,12 @@
     padding-top: 0.7rem;
     margin-right: 0.75rem;
     cursor: pointer;
+    transition: 150ms ease-in-out;
+}
+
+.post_input:hover {
+  background-color: #7a7676;
+  transition: 150ms ease-in-out;
 }
 
 .post_input:focus {
@@ -76,10 +82,10 @@
 
 @media only screen and (max-width: 312px) {
     .post_input {
-        min-height: 1.5rem;
+        min-height: 1.25rem;
         font-size: 0.9rem;
         margin: 0.25rem 0;
-        padding-top: 0.5rem;
+        padding-top: 0.25rem;
     }
       .newpost_container {
         padding: 0;
@@ -88,7 +94,7 @@
         padding: 0 ;
       }
       .post_image_button {
-        height: 2rem;
+        height: 1.5rem;
         margin: 0.25rem 0;
         font-size: clamp(0.6rem, 5vw, 0.85rem)
       }

@@ -118,7 +118,7 @@ const Post = ({image, text, authorId, likes, _id, createdAt, comments}) => {
             <div className='post_likes_comments_flex'>
                 <p id="post_likes"> <AiFillLike 
                 style={{color: `${likedBy?.includes(currentUser.user._id) ? "var(--blue-dark)" : "f3f3f3"}`}}/> {likedBy.length} likes</p>
-                <p>{comments?.length} comments</p>
+                <p>{commentsArray?.length} comments</p>
             </div>
             <div className='break_line'></div>
             <div className='post_options'>

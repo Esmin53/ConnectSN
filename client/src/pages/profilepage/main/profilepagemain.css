@@ -32,7 +32,7 @@
     color: #fefefe;
     margin-top: 1rem;
     border-radius: 1rem;
-    padding-top: 1rem;
+    padding: 1rem 0.5rem;
     box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
 }
 
@@ -40,7 +40,11 @@
     display: flex;
     gap: 0.5rem;
     margin: 1rem 0;
-    font-size: clamp(0.85rem, 3vw, 1.1rem);
+    font-size: clamp(0.75rem, 3vw, 1.1rem);
+}
+
+.profile_user_info > h2 {
+    font-size: clamp(1rem, 5vw, 1.5rem);
 }
 
 .profile_user_info > button {
@@ -80,14 +84,21 @@
     width: auto;
 }
 
+#profile_header_friends {
+    font-size: clamp(1.15rem , 5vw, 1.75rem);
+}
+
+#profile_header_p {
+    font-size: clamp(0.85rem, 3vw, 1rem);
+}
+
 .friends_button {
-    width: 9rem;
-    height: 2.5rem;
+    width: clamp(4rem, 40vw, 9rem);
+    height: clamp(2rem, 5vw,  2.5rem);
     border-radius: 0.5rem;
     color: var(--blue-dark);
-    background-color: var(--secondary-dark);
     border: none;
-    font-size: 1.1rem;
+    font-size: clamp(0.75rem, 5vw, 1.1rem);
     cursor: pointer;
     text-decoration: none;
 }
@@ -133,6 +144,7 @@
 
     .profile_user_info {
         width: 41.5rem;
+        padding: 0;
     }
 
     .profile_friends_container {
@@ -153,11 +165,11 @@
     }
 
     .profile_user_info {
-        width: 100%;
+        width: 98vw;
         margin: 0;
         border-radius: 0;
         max-width: 100vw;
-        padding: 0;
+        padding: 0.5rem 1vw;
     }
 
     .profile_friends_container {

@@ -32,6 +32,7 @@
     border-radius: 0.5rem;
     background-color: var(--secondary-dark);
     position: relative;
+    z-index: 98;
 }
 
 .personal_info_header {
@@ -103,5 +104,9 @@
         font-size: clamp(0.8rem, 3.5vw, 1rem);
         width: 5rem;
         height: 1.7rem;
+    }
+
+    .edit_info_button_trash {
+        display: none;
     }
 }

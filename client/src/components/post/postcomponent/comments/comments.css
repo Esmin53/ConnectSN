@@ -7,6 +7,10 @@
     font-weight: 600;
 }
 
+#comment_preview {
+    margin-left: 0.35rem;
+}
+
 .comments_container {
     width: 100vw;
     height: 100vh;
@@ -25,7 +29,7 @@
     background-color: var(--secondary-dark);
     margin-top: 15vh;
     border-radius: 1rem;
-    padding: 1% 1%;
+    padding: 0% 1%;
     overflow: auto;
     position: relative;
 
@@ -34,12 +38,12 @@
 .comments_header {
     border-bottom: solid 1px #4b4b4b;
     width: 98%;
-    height: 3rem;
     font-size: clamp(1rem, 3vw, 1.5rem);
     position: relative;
     margin-bottom: 0.5rem;
     display: flex;
     align-items: center;
+    height: 3rem;
 }
 
 .comment {
@@ -48,6 +52,7 @@
     gap: clamp(0.25rem, 5vw, 0.5rem);
     width: 98%;
     margin-bottom: clamp(0.25rem, 5vw, 0.5rem);
+    
 }
 
 .comment_content {

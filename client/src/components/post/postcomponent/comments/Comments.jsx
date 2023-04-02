@@ -11,7 +11,7 @@ const Comments = ({comments}) => {
     
     return (
     <div>
-         {comments[0] && <div className="comment" >
+         {comments[0] && <div className="comment" id="comment_preview">
                         <Link to={`/myprofile/${comments[0].commentAuthorId}`} id="comment_name">
                             <img className='profile_picture' src={comments[0].profilePicture} /> 
                         </Link>

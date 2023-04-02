@@ -21,12 +21,59 @@
     position: sticky;
     top: 4rem;
     font-size: clamp(0.9rem, 1vw, 1rem);
+    overflow: hidden;
+    z-index: 98;
+}
+
+.userinfo_top {
+    width: 100%;
+    height: 4rem;
+    background-color: #383838;
+    display: flex;
+    justify-content: center;
+}
+
+.userinfo_profile_picture {
+    width: 7rem;
+    height: 7rem;
+    border-radius: 50%;
+    margin-top: 1.25rem;
+    border: solid 0.25rem var(--secondary-dark);
+
 }
 
 .userinfo {
     display: flex;
     justify-content: space-between;
     margin: 0.5rem;
+}
+
+.userinfo_content {
+    margin-top: 4rem;
+}
+
+.userinfo_statistics {
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.userinfo_statistics_flex {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.userinfo_statistics_flex > p {
+    font-size: 0.9rem;
+}
+
+.userinfo_statistics_flex > h2 {
+    font-size: 2rem;
 }
 
 .friends {

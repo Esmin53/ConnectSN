@@ -1,6 +1,19 @@
 const User = require("../models/User");
+const Post = require("../models/Post")
 
 // READ (GET) CONTROLLERS
+
+const statistics = async (req, res) => {
+    try {
+        const {userId} = req.user;
+
+        const posts = await Post.find({authorId: userId})
+
+        res.status(200).json(posts.length)
+    } catch (error) {
+        res.status(400).json({msg: error})
+    }
+}
 
 const search = async (req, res) => {
     try {
@@ -79,7 +92,21 @@ const getRecommendedUsers = async (req, res) => {
         const locationRecommendation = await User.find({ location: location}).select(['-posts', '-email', '-password', '-background', '-sentRequests', '-occupation'])
         const occupationRecommendation = await User.find({ occupation: occupation}).select(['-posts', '-email', '-password', '-background', '-sentRequests', '-location'])
         let usersArray = [...locationRecommendation, ...occupationRecommendation];
+
+        if(usersArray.length == 0) {
+            return res.status(200).json([])
+        }
+
+        usersArray = usersArray.filter(function(item, index) {
+            return index === usersArray.findIndex(function(obj) {
+                return (item._id.toJSON() === obj._id.toJSON())
+            })
+        })
+       
+        
+
         usersArray = usersArray.filter((item) => item._id != id && !item?.friends.includes(id) && !item.recievedRequests.includes(id))
+
 
         res.status(200).json(usersArray)
     } catch (error) {
@@ -187,17 +214,15 @@ const removeFriend = async (req, res) => {
     try {
         const {userId} = req.user;
         const {friendId} = req.params;
+        console.log("Radi")
 
         const user = await User.findById({_id: userId});
         const friend = await User.findById({_id: friendId});
 
-        if(!user.friends.includes(friendId)) {
+        if(user.friends.includes(friendId)) {
             user.friends = user.friends.filter(id => id != friend._id);
             friend.friends = friend.friends.filter(id => id != user._id);
-        } else {
-            user.friends.push(friend._id);
-            friend.friends.push(user._id);
-        }
+        } 
 
         await user.save();
         await friend.save();
@@ -238,4 +263,4 @@ const getFriends = async (req, res) => {
 
 module.exports = {search, sendRemoveRequest, acceptDeclineRequest, removeFriend,
                  getUser, searchUsers, getAllUsers, getRequests, getFriends, updateUser,
-                getUserLight, getRecommendedUsers};
+                getUserLight, getRecommendedUsers, statistics};

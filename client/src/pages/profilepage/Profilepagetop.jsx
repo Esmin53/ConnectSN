@@ -1,19 +1,23 @@
-import React, { useEffect, useState } from 'react'
-import "./profilepage.css"
-import {MdPhotoCamera, MdModeEditOutline} from "react-icons/md"
-import { useLocation } from 'react-router-dom'
-import { useSelector } from 'react-redux'
-import axios from 'axios'
-import Profilepicture from '../../components/edit/profilepicture/Profilepicture'
-import Background from '../../components/edit/backgroundimage/Background'
-import Personalinfo from '../../components/edit/personalinfo/Personalinfo'
+import React, { useEffect, useState } from 'react';
+import "./profilepage.css";
+import {MdPhotoCamera, MdModeEditOutline, MdKeyboardArrowDown} from "react-icons/md";
+import { useLocation } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import axios from 'axios';
+import Profilepicture from '../../components/edit/profilepicture/Profilepicture';
+import Background from '../../components/edit/backgroundimage/Background';
+import Personalinfo from '../../components/edit/personalinfo/Personalinfo';
+import { updateFriends, updateSentRequests } from '../../redux/rootSlice';
+import { FaUserClock, FaUserPlus } from 'react-icons/fa';
 
 const Profilepagetop = () => {
-  const location = useLocation()
-  const userId = location.pathname.split("/")[2]
-  const currentUser = useSelector(state => state)
-  const [user, setUser] = useState(null)
-  const [isFetching, setIsFetching] = useState(true)
+  const location = useLocation();
+  const dispatch = useDispatch();
+  const userId = location.pathname.split("/")[2];
+  const currentUser = useSelector(state => state);
+  const [user, setUser] = useState(null);
+  const [isFetching, setIsFetching] = useState(true);
+  const [isRemoveFriendOpen, setIsRemoveFriendOpen] = useState(false);
   
   const getUser = async () => {
     setIsFetching(true)
@@ -27,6 +31,35 @@ const Profilepagetop = () => {
       setIsFetching(false)
     } catch (error) {
       console.log(error);
+    }
+  }
+
+  const addFriend = async (id) => {
+    try {
+      const res = await axios.post("http://localhost:3001/api/v1/user/request", {
+        friendId: id
+      }, {
+        headers: {
+          Authorization: `Bearer ${currentUser.token}`
+        }
+      })
+      dispatch(updateSentRequests(res.data));
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  const removeFriend = async () => {
+    try {
+      const res = await axios.delete(`http://localhost:3001/api/v1/user/remove/${userId}`, {
+        headers: {
+          Authorization: `Bearer ${currentUser.token}`
+        }
+      })
+      dispatch(updateFriends(res.data))
+      console.log(res.data)
+    } catch (error) {
+      console.log(error)
     }
   }
   
@@ -66,8 +99,14 @@ const Profilepagetop = () => {
               {userId === currentUser?.user?._id && <Personalinfo />}
               {userId !== currentUser?.user?._id && <div> 
                 {currentUser.user.friends.includes(userId) ? 
-                <button className='edit_profile_button'>Friends</button> : 
-                <button className='edit_profile_button'>Send request</button>}  
+                <button className='profile_page_friend_button center' onClick={() => setIsRemoveFriendOpen(prev => !prev)}
+                >Friends <MdKeyboardArrowDown />
+                {isRemoveFriendOpen && <div className='remove_friend_dropdown' onClick={removeFriend}>Remove friend</div>}
+                </button> : 
+                <button className='profile_page_friend_button center' onClick={() => addFriend(userId)}>
+                  {currentUser?.user?.sentRequests?.includes(userId) ? <span>Sent <FaUserClock /></span> :
+                   <span>Send request <FaUserPlus /></span>}  
+                </button>}  
               </div>}
             </div>
           </div>  
