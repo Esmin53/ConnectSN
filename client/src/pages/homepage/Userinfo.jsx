@@ -6,7 +6,7 @@ import PersonalInfo from "../../components/edit/personalinfo/Personalinfo"
 const Userinfo = () => {
   
     const curentUser = useSelector(state => state)
-    const [statistics, setStatistics] = useState()
+    const [statistics, setStatistics] = useState(null)
 
     const fetchUserStats = async () => {
         try {
@@ -55,12 +55,12 @@ const Userinfo = () => {
                     <p>Friends</p>
                 </div>
                 <div className='userinfo_statistics_flex'>
-                    <h2>{statistics}</h2>
+                    <h2>{statistics?.postsNumber}</h2>
                     <p>Posts</p>
                 </div>
                 <div className='userinfo_statistics_flex'>
-                    <h2>1999</h2>
-                    <p>Visits</p>
+                    <h2>{statistics?.likes}</h2>
+                    <p>Likes</p>
                 </div>
            </div>
            <div className='center' style={{marginTop: "1.5rem"}}>

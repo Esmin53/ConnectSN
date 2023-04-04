@@ -3,6 +3,7 @@ import "./personalinfo.css";
 import { useSelector, useDispatch } from 'react-redux';
 import {BiRefresh} from "react-icons/bi";
 import { AiOutlineArrowLeft } from 'react-icons/ai';
+import {MdEdit} from "react-icons/md"
 import axios from 'axios';
 import Loading from '../../loading/Loading';
 import {FaTrash} from "react-icons/fa";
@@ -69,20 +70,20 @@ const Personalinfo = () => {
 
   return (
     <>
-    <button className='edit_profile_button' onClick={() => setIsOpen(true)}
+    <button className='edit_profile_button' onClick={() => setIsOpen(true)} id={page === 'home' && "homepage_edit_button"}
     style={{"backgroundColor": `${page === 'home' ? "#145DA0" : "#383838"}`}}>
-      Edit profile
+      <MdEdit /> <span className='disapear'>Edit profile</span>
     </button>
 
     {isOpen && <div className='personal_info_container'>
           
         {isLoading && <Loading />}
         <form className='personal_info_form' onSubmit={handleSubmit}>
-          <p className='close_profile_picture center'
+          <div className='personal_info_header'>
+            <p>Edit profile</p>
+            <p className='close_profile_picture center'
             onClick={() => setIsOpen(false)}><AiOutlineArrowLeft />
           </p>
-          <div className='personal_info_header center'>
-            <p>Edit profile</p>
           </div>
           <div className='personal_info_flex'>
             <input type="text" className='edit_info_input' placeholder={currentUser.user.firstName}

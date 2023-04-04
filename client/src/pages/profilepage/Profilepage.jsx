@@ -5,6 +5,7 @@ import Profilepagemain from './main/Profilepagemain'
 import Profilepagetop from './Profilepagetop'
 import axios from 'axios'
 import { useSelector } from 'react-redux'
+import Test from "./test/Test"
 
 const Profilepage = () => {
 

@@ -64,6 +64,8 @@ const Friends = () => {
   return (
     <ul className='friends'>
         <h3 className='fr'>My Friends</h3>
+        {currentUser?.user?.friends?.length === 0 && <p className='no_friends_message'>Looks like there is nothing here! Try finding some people!</p>}
+
         {friends?.map((item, index) => {
           return <li className='friend_container' key={index}>
           <div className='friend'>
@@ -80,30 +82,7 @@ const Friends = () => {
             {!currentUser?.user?.friends?.includes(item._id) && <FaUserPlus onClick={() => addFriend(item._id)}/> }
           </div>
         </li>
-        })}
-        
-        <div className='line'></div>
-        
-        {users?.map((item, index) => {
-          return <li className='friend_container' key={index} >
-          <Link to={`/profile/${item._id}`} className='friend'>
-            <div className='profile_picture_container'>
-              <img className='profile_picture' src={item.profilePicture} />
-            </div>
-            <div className='friend_info'>
-              <p>{item.firstName} </p>
-              <p>{item.lastName} </p>
-          </div>
-          </Link>
-          <div className={'center add_friend' }>
-            {currentUser?.user?.friends?.includes(item._id) && <FaUserMinus onClick={() => addFriend(item._id)}/>}
-            {!currentUser?.user?.friends?.includes(item._id) &&
-             !currentUser?.user?.sentRequests?.includes(item._id) && <FaUserPlus onClick={() => addFriend(item._id)}/> }
-            {currentUser?.user?.sentRequests?.includes(item._id) && <FaUserClock />}
-          </div>
-        </li>
-        })}
-        
+        })}  
     </ul>
   )
 }

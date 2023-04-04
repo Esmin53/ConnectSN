@@ -75,14 +75,14 @@ const Navbar = () => {
     <div className='navbar_container'>
         <div className='navbar_left'>
             <h2 className='logo'>Connect</h2>
-            
+            <Search />
         </div>
             
         <ul className='navbar_right'>
             <Link to="/home" className='center navbar_icon'>
                 <AiFillHome />
             </Link>
-            <Link to={`/myprofile/${currentUser.user._id}`} className='center navbar_icon'>
+            <Link to={`/navigate/${currentUser.user._id}`} className='center navbar_icon'>
                 <FaUserAstronaut />
             </Link>
             <li className='center navbar_icon' onClick={() => {
@@ -115,7 +115,7 @@ const Navbar = () => {
                     setOpenSettings(prev => !openSettings)}}>
                 <IoSettingsSharp />
                 {openSettings && <ul className='dropdown'>
-                    <Link to={`/myprofile/${currentUser.user._id}`} className='settings center'>Profile</Link>
+                    <Link to={`/navigate/${currentUser.user._id}`} className='settings center'>Profile</Link>
                     <Link to={"/home"} className='settings center'>Homepage</Link>
                     <div className='break_line'></div>
                     <li className='settings center' onClick={handleLogout}>Sign out</li>

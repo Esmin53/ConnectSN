@@ -34,6 +34,7 @@ const Posts = () => {
   return (
     <div className='posts_container'>
        {array}
+       {array.length === 0 && <p className='no_posts_message'>For you page seems empty, try adding some friends!</p>}
     </div>
   )
 }

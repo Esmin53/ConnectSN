@@ -22,12 +22,11 @@ const Comments = ({comments}) => {
                         </div>}
         <p className='see_all_comments' onClick={() => setShowComments(true)}>See all comments</p>
         {showComments && <div className='comments_container'>
-            <div className='comments'> 
-            <p className='close_profile_picture center'
-            onClick={() => setShowComments(false)}><AiOutlineArrowLeft /></p>
+            <div className='comments'>
             <div className='comments_header'> 
                 <p>Comments</p>
-                
+                <p className='close_profile_picture center'
+                onClick={() => setShowComments(false)}><AiOutlineArrowLeft /></p>
             </div>
                 {comments.map((item, index) => {
                     return <div className="comment" key={index}>

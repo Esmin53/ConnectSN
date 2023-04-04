@@ -98,9 +98,11 @@ const Post = ({image, text, authorId, likes, _id, createdAt, comments}) => {
     <div className='post_container'>
         <div className='post_header'>
             <div className='post_header_info_container'>
-                <img className='profile_picture' src={author.profilePicture} alt="Author profile picture" />
+                <Link to={`/navigate/${authorId}`}>
+                    <img className='profile_picture' src={author.profilePicture} alt="Author profile picture" />
+                </Link>
                 <div id="post_header_info">
-                <Link to={`/myprofile/${authorId}`} className="Link">{author.firstName} {author.lastName}</Link>
+                <Link to={`/navigate/${authorId}`} className="Link">{author.firstName} {author.lastName}</Link>
                 <p style={{fontSize: "0.8rem"}}>{timestamp}</p>
             </div>
             {currentUser.user._id === authorId && <div className='post_author_options center'>
@@ -117,14 +119,14 @@ const Post = ({image, text, authorId, likes, _id, createdAt, comments}) => {
         <div className='post_footer'>
             <div className='post_likes_comments_flex'>
                 <p id="post_likes"> <AiFillLike 
-                style={{color: `${likedBy?.includes(currentUser.user._id) ? "var(--blue-dark)" : "f3f3f3"}`}}/> {likedBy.length} likes</p>
-                <p>{commentsArray?.length} comments</p>
+                style={{color: `${likedBy?.includes(currentUser.user._id) ? "var(--blue-dark)" : "#f3f3f3"}`}}/> {likedBy.length} likes</p>
+                <p>{commentsArray?.length} comment{commentsArray.length !== 1 && "s"}</p>
             </div>
             <div className='break_line'></div>
             <div className='post_options'>
-                <p className='post_option center'
+                <p className='post_option center' style={{color: `${likedBy?.includes(currentUser.user._id) ? "var(--blue-dark)" : "#f3f3f3"}`}}
                 onClick={() => likePost()}> <AiFillLike /> I like this</p>
-                <p className='post_option center'
+                <p className='post_option center' style={{color: `${comment?.length > 0 ? "#145DA0" : "#f3fef3"}`}}
                 onClick={() => commentPost()}> <FaCommentAlt />Comment</p>
             </div>
             <div className='break_line'></div>

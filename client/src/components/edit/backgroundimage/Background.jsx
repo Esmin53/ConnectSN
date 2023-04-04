@@ -66,14 +66,15 @@ const Background = () => {
         
         <div className='add_background_image center'>
             {isUploading && <Loading />}
-            <div className='add_background_header center'>
+            <div className='add_background_header'>
               <p>Add Background</p>
-            </div>
-            <p className='close_profile_picture center'
+              <p className='close_profile_picture center'
                 onClick={() => setBackground(false)}><AiOutlineArrowLeft />
             </p>
+            </div>
             <div className='background_image_area'>
                 {url && <img className='background_image_preview' src={url}/>}
+                <p className='background_image_warning'>Bigger files might take longer to upload</p>
             </div>
                     <div className='background_image_buttons'>
                         <div className='background_image_file_input center'>

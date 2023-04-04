@@ -1,5 +1,6 @@
 const User = require("../models/User");
-const Post = require("../models/Post")
+const Post = require("../models/Post");
+const { default: mongoose } = require("mongoose");
 
 // READ (GET) CONTROLLERS
 
@@ -8,8 +9,15 @@ const statistics = async (req, res) => {
         const {userId} = req.user;
 
         const posts = await Post.find({authorId: userId})
+        const postsNumber = posts.length;
 
-        res.status(200).json(posts.length)
+        let likes = 0;
+
+        posts.map((item) => {
+            return likes += item?.likes?.length
+        })
+
+        res.status(200).json({postsNumber, likes})
     } catch (error) {
         res.status(400).json({msg: error})
     }
@@ -103,10 +111,7 @@ const getRecommendedUsers = async (req, res) => {
             })
         })
        
-        
-
         usersArray = usersArray.filter((item) => item._id != id && !item?.friends.includes(id) && !item.recievedRequests.includes(id))
-
 
         res.status(200).json(usersArray)
     } catch (error) {

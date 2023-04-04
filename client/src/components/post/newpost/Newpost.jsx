@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import "./newpost.css"
 import "./createpost.css"
-import { FaImage } from "react-icons/fa"
+import { FaImage, FaTimes } from "react-icons/fa"
 import { MdDone } from "react-icons/md"
 import { useSelector } from "react-redux"
 import { AiOutlineArrowLeft } from 'react-icons/ai'
@@ -63,35 +63,37 @@ const Newpost = () => {
     <div className="newpost_container" onClick={() => setIsOpen(true)}>
       <div className="newpost_flex">
           <img className="profile_picture" src={currentUser.user.profilePicture} alt={currentUser.user.firstName} id="newpost_profile_picture"/>
-        <div className="post_input"> What's on your mind?</div>
+        <div className="post_input"> <p id="post_input">What's on your mind?</p></div>
       </div>
       <div className='line'></div>
       <div className="newpost_flex">
         <button className="post_image_button">
-          <p style={{ fontSize: "1rem" }}>Add an image</p> <FaImage />
+          <p>Add an image</p> <FaImage />
         </button>
       </div>
     </div>
     {isOpen && <div className='create_post_container'>
       { isLoading && <Loading /> }
       <form className='create_post_form' onSubmit={handleSubmit}>
-        <p className='close_profile_picture center'
+        <div className='create_post_header'>
+          <h3>New Post</h3>
+          <p className='close_profile_picture center'
         onClick={() => setIsOpen(false)}><AiOutlineArrowLeft />
         </p>
-        <div className='create_post_header center'>
-          <h3>New Post</h3>
         </div>
-        <div className='line'></div>
+        <div className='create_post_user_info'>
+          <img className='profile_picture' src={currentUser?.user?.profilePicture} />
+          <div className='create_post_user_info_flex'>
+            <p>{currentUser.user.firstName} {currentUser.user.lastName}</p>
+          </div>
+        </div>
         <textarea className='create_post_input' placeholder="What's on your mind?"
         onChange={(e) => setText(e.target.value)}/>
         <div className='center'>
           <div className='create_post_image_container'>
             {imagePreview && <img src={imagePreview} alt="An image you are submitting" 
             className='create_post_image'/>}
-          </div>
-        </div>
-        <div className='create_post_button_container'>
-          <div className='button create_post_image_button center' > 
+            <div className='create_post_image_button center' > 
           Add an image
           <input type="file" id='file' 
             onChange={(event) => {
@@ -100,6 +102,14 @@ const Newpost = () => {
                 setImagePreview(imgUrl)
                 }}
           /></div>
+          {imagePreview && <div className='remove_post_image_button center'
+          onClick={() => setImagePreview(null)}>
+              <FaTimes />
+          </div> } 
+          </div>
+        </div>
+        <div className='create_post_button_container'>
+
           <button className='button create_post_submit_button' type="submit">Done</button>
         </div>
       </form>

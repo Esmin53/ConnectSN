@@ -33,15 +33,15 @@ const Friends = () => {
         <div className='profile_friends_header'>
           <div>
             <h2 id="profile_header_friends">Friends</h2>
-            <p id='profile_header_p'>{currentUser?.user?.friends?.length} friend{currentUser?.user?.friends?.length > 1 && "s"}</p>
+            <p id='profile_header_p'>{friends?.length} friend{friends?.length !== 1 && "s"}</p>
           </div>
           <Link to={`/friends/${userId}`} className='friends_button center'>See all friends</Link>
         </div>
         <div className='profile_friends'>
             {friends?.map((item, index) => {
               if(index === 9) return
-              return <div key={index}>  
-                  <img src={item.profilePicture} className='profile_friend' />
+              return <div key={index} onClick={() => navigate(`/navigate/${item._id}`)}>  
+                  <img src={item.profilePicture} className='profile_friend_image' />
                 <p className='profile_friend_name'>{item.firstName} {item.lastName}</p>
               </div>
             })}                   

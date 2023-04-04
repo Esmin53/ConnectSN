@@ -2,7 +2,6 @@
     flex: 1;
     display: flex;
     justify-content: center;
-    padding: 0 2rem;
     position: relative;
     color: #fefefe;
 }
@@ -114,9 +113,10 @@
     align-items: center;
     width: 100%;
     gap: 0.5rem;
+    overflow: hidden;
 }
 
-.profile_friend {
+.profile_friend_image {
     background-color: #383838;
     min-width: 4rem;
     min-height: 4rem;
@@ -126,6 +126,13 @@
     height: 30vw;
     max-height: 8rem;
     max-width: 8rem;
+    cursor: pointer;
+    transition: 150ms ease-in-out;
+}
+
+.profile_friend_image:hover {
+    transform: scale(1.05);
+    transition: 150ms ease-in-out;
 }
 
 .profile_friend_name {

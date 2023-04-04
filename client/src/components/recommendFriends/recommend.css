@@ -73,18 +73,24 @@
 }
 
 .friend_recomendation > p {
-    font-size: clamp(0.5rem, 4vw, 1rem);
+    font-size: clamp(0.75rem, 4vw, 1rem);
 }
 
 .recommended_profile_picture {
     width: 100%;
     height: 65%;
     margin-bottom: 0.25rem;
+    transition: 250ms ease-in-out;
+}
+
+.recommended_profile_picture:hover {
+    transform: scale(1.05);
+    transition: 250ms ease-in-out;
 }
 
 .add_recomendation {
     width: 95%;
-    height: 1.75rem;
+    height: clamp(1.5rem, 10vw, 1.75rem);
     margin-top: auto;
     margin-bottom: 0.25rem;
     background-color: var(--blue-dark);
@@ -93,7 +99,7 @@
     color: #fef3fe;
     cursor: pointer;
     transition: 250ms ease-in-out;
-    font-size: clamp(0.65rem, 4vw, 1.1rem);
+    font-size: clamp(0.75rem, 4vw, 1rem);
     gap: 0.15rem;
     z-index: 97;
 }
@@ -154,6 +160,4 @@
         height: clamp(2rem, 7.5vw, 2rem);
         max-width: 2.5rem;
     }
-    
-
 }

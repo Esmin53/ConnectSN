@@ -65,7 +65,7 @@ const Profilepagetop = () => {
   
   useEffect(() => {
     getUser()
-  }, [])
+  }, [userId])
   
   if(isFetching && !user) {
     return <div className='profile_page_container'>
@@ -79,23 +79,27 @@ const Profilepagetop = () => {
   }
   
   return (
-    <div className='profile_page_container'>    
-      <div className='profile_page_top'>
-        <div className='background'>
-          {user?.backgroundImage ? <img src={user?.backgroundImage} className="background_image"/> : <div className='background_image'></div>}    
-          {userId === currentUser.user._id && <button className='add_background'>
+    <div className='profile_page_top_container'>
+        <div className='profile_page_background_image_area'>
+        {user?.backgroundImage && <img src={user?.backgroundImage} className="profile_page_background_image"/>}
+        {userId === currentUser.user._id && <button className='add_background'>
             <MdPhotoCamera /> <Background />
             <p style={{fontSize: "1rem"}} id="add_background_text">New background image</p>
-          </button>} 
-          <div className='profile_page_info'>
+        </button>} 
+        </div>
+        <div className='profile_page_user_info' >
             <div className='main_profile_picture_container'>
               <img className='main_profile_picture' src={user.profilePicture} />
-              {userId === currentUser.user._id && <div className='new_profile_picture'>
+                {userId === currentUser.user._id && <div className='new_profile_picture'>
                 <Profilepicture />  <MdPhotoCamera />
               </div>}
-            </div>            
+              
+            </div> 
             <div className='profile_info_flex'>
-              <p style={{fontSize: "clamp(0.9rem, 5vw, 2rem)"}}>{user.firstName} {user.lastName}</p>    
+            <div className='profile_info_flex_left'>
+                    <p className='profile_page_user_name'>{user.firstName} {user.lastName}</p> 
+                    <p className='profile_info_friends'>{user?.friends?.length} friends</p>  
+                </div> 
               {userId === currentUser?.user?._id && <Personalinfo />}
               {userId !== currentUser?.user?._id && <div> 
                 {currentUser.user.friends.includes(userId) ? 
@@ -108,10 +112,8 @@ const Profilepagetop = () => {
                    <span>Send request <FaUserPlus /></span>}  
                 </button>}  
               </div>}
-            </div>
-          </div>  
+            </div>   
         </div>
-      </div>
     </div>
   )
 }

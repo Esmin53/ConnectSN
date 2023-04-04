@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import "./login.css"
 import {useFormik} from "formik"
 import { loginSchema } from './loginschema'
@@ -12,9 +12,10 @@ const Login = () => {
     const dispatch = useDispatch();
     const currentUser = useSelector((state) => state.user)
     const [isFetching, setIsFetching] = useState(false)
+    const [response, setResponse] = useState(null)
 
     const navigate = useNavigate();
-    
+
     const onSubmit = async (values, actions) => {
         try {
             setIsFetching(true)
@@ -24,14 +25,15 @@ const Login = () => {
             })
             await dispatch(login(res.data))
             setIsFetching(false)
+            setResponse(`Welcome back, ${res.data.firstName}`)
             navigate("/home");
         } catch (error) {
-            console.log(error.response.data)
+            setResponse(error.response.data.msg)
             setIsFetching(false)
         }
     }
 
-    const {values, errors,handleChange, handleBlur, touched, handleSubmit} = useFormik({
+    const {values,handleChange, handleBlur, handleSubmit} = useFormik({
         initialValues: {
             "email": "",
             "password": ""
@@ -40,6 +42,16 @@ const Login = () => {
         onSubmit,
     })
 
+    useEffect(() => {
+        const timeout = setTimeout(() => {
+            setResponse(null)
+        }, 3000);
+
+        return () => {
+            clearTimeout(timeout)
+        }
+    }, [response])
+    
     if(currentUser) {
         return <Navigate to="/home" />
     }
@@ -50,21 +62,29 @@ const Login = () => {
         <div className='login_form_container'>
                 <img src='https://img.freepik.com/free-vector/mobile-login-concept-illustration_114360-83.jpg?w=740&t=st=1676586373~exp=1676586973~hmac=dce813afaf4dfd5ac85addbcf2f63a9b04e6b64d1465edc1c5d7b3d9c8116dc4' alt="login image" className='form_image' />
             <form className='login_form' onSubmit={handleSubmit}>
-                <h2 className='login_form_header'>Connect</h2>
-                <h3 className='text'>
+                <div className='login_form_header'>
+                    <h2>Connect</h2>
+                    <h3 className='text'>
                     <span style={{color: "#145DA0"}}>Sign in</span> to your account</h3>
+                {response && <p className='auth_error'>{response}</p>}
+                </div>
+               
+                <div className='center fr'>
+
+                    <input type="email" placeholder='Email'
+                    value={values.email} onChange={handleChange} id="email" onBlur={handleBlur}
+                    className="form_input" />
                 
-                <input type="email" placeholder='Email'
-                value={values.email} onChange={handleChange} id="email" onBlur={handleBlur}
-                className={touched.email && errors.email ? "error_input form_input" : "form_input"} />
-                <div className='fs'>{errors.email && <p className='error_input_message'>{errors.email}</p>}</div>
                 
                 <input type="password" placeholder='Password' id="password" onBlur={handleBlur}
                 value={values.password} onChange={handleChange}
-                className={touched.password && errors.password ? "error_input form_input" : "form_input"} />
-                <div className='fs'>{errors.password && <p className='error_input_message'>{errors.password}</p>}</div>
-                <button className='form_button' type='submit'>Sign in</button>
-                <Link to="/register" className='link'>Don't have an account? Sign up!</Link>
+                className="form_input" />
+                </div>
+
+                <div className='fr'>
+                    <button className='form_button' type='submit'>Sign in</button>
+                    <Link to="/register" className='link'>Don't have an account? Sign up!</Link>
+                </div>
             </form>
         </div>
     </div>

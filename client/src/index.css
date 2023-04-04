@@ -100,7 +100,7 @@ input::file-selector-button:hover {
   width: auto;
   height: 1px;
   background-color: #4b4b4b;
-  z-index: 98;
+  z-index: 91;
 }
 
 .Link {

@@ -69,13 +69,14 @@ const Profilepicture = () => {
     {profilePicture && <div className='add_profile_picture_container center'>
          <div className='add_profile_picture'>
             {isUploading && <Loading />}
-            <div className='add_profile_picture_header center'>
+            <div className='add_profile_picture_header'>
               <p>Add Profile Picture</p>
+              <p className='close_profile_picture center'
+              onClick={() => setProfilePicture(false)}><AiOutlineArrowLeft /></p>
             </div>
-            <p className='close_profile_picture center'
-            onClick={() => setProfilePicture(false)}><AiOutlineArrowLeft /></p>
             <div className='profile_picture_area center'>
                 {<img src={url} className="profile_picture_preview"/>}
+                <p className='profile_picture_warning'>Bigger files might take longer to upload</p>
             </div>
             <div className='profile_picture_file_input center'>
               Choose a picture

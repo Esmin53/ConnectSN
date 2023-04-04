@@ -20,37 +20,56 @@
 }
 
 .login_form {
-    height: 100%;
     width: 22.5rem;
+    padding: 1rem 0;
     background-color: #fefefe;
     display: flex;
     flex-direction: column;
     align-items: center;
     position: relative;
-    justify-content: center;
+    justify-content: space-between;
     border: solid 1.25px rgba(159, 154, 159, 0.2);
+    border-radius: 0.5rem;
 }
 
 .login_form_header {
-    font-size: 2.2rem;
+    font-size: 1.2rem;
     color: #145DA0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 0.5;
+}
+
+.auth_error {
+    color: #be2121;
+    font-size: 0.75rem;
+    margin: 0 0.75rem;
+    text-align: center;
+}
+
+.login_input_container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .form_input {
     width: 100%;
     border: solid 2px rgba(159, 154, 159, 0.2);
-    height: 3rem;
+    height: clamp(2.5rem, 7.5vw ,3rem);
     width: 90%;
-    margin-top: 1rem;
+    margin-top: clamp(0.5rem, 7.5vw ,1rem);
     border-radius: 0.5rem;
     padding-left: 0.5rem;
     font-size: 1rem;
     color: #121213;
+    outline: none;
 }
 
 .form_input:focus {
-    outline: none;
-    border: solid 1.5px #145DA0;
+    box-shadow: 1px 0 4px 1px var(--blue-dark);
 }
 
 .error_input {
@@ -64,10 +83,10 @@
 
 .form_button {
     width: 92.5%;
-    height: 3rem;
+    height: clamp(2rem, 7.5vw, 2.5rem);
     background-color: #145DA0;
     border: none;
-    margin: 1rem 0 0.5rem 0;
+    margin: 0rem 0 0.5rem 0;
     color: #fff;
     border-radius: 0.5rem;
     cursor: pointer;
@@ -99,9 +118,14 @@
   .form_image {
     display: none;
   }
+
+  .login_form_container {
+    height: 100vh;
+  }
   .login_form {
     width: 100%;
-    padding: 0 3rem;
+    height: 98vh;
+    padding: 1vh 0;
   }
   .login_form {
     border: none;
@@ -114,7 +138,8 @@
 
 @media only screen and (max-width: 300px) {
    .login_form {
-    padding: 0;
+    padding: 1vh 0;
+    background-color: #f3f3f3;
    }
 
    .form_button {

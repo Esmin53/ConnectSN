@@ -32,18 +32,18 @@
     padding: 0% 1%;
     overflow: auto;
     position: relative;
-
 }
 
 .comments_header {
     border-bottom: solid 1px #4b4b4b;
     width: 98%;
-    font-size: clamp(1rem, 3vw, 1.5rem);
+    font-size: clamp(0.9rem, 3vw, 1.3rem);
     position: relative;
     margin-bottom: 0.5rem;
     display: flex;
     align-items: center;
-    height: 3rem;
+    justify-content: space-between;
+    height: clamp(2rem, 4vw, 2.5rem);
 }
 
 .comment {
@@ -78,5 +78,14 @@
         width: 100vw;
         height: 100vh;
         margin-top: 0;
+    }
+
+    #comment_preview {
+        display: none;
+    }
+
+    .see_all_comments {
+        margin-top: 0rem;
+        margin-left: 0.25rem;
     }
 }

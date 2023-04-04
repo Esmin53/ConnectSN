@@ -9,6 +9,7 @@ import Loading from '../../components/loading/Loading'
 const Register = () => {
     const [isFetching, setIsFetching] = useState(false)
     const navigate = useNavigate()
+    const [response, setResponse] = useState(null)
 
     const onSubmit = async (values, actions) => {
         try {
@@ -17,12 +18,14 @@ const Register = () => {
                 firstName: values.firstName,
                 lastName: values.lastName,
                 email: values.email,
-                password: values.password
+                password: values.password,
+                confirmPassword: values.confirmPassword
             })
             setIsFetching(false)
             navigate("/")
         } catch (error) {
-            console.log(error)
+            setResponse(error.response.data.msg)
+            setIsFetching(false)
         }
     }
 
@@ -50,9 +53,8 @@ const Register = () => {
                 <h2>Connect</h2>
                 <h3>Create an account!</h3>
             </div>
-            
+               {response && <p className='auth_error'>{response}</p>}
             <div style={{width: "100%"}}>
-           
                 <div className='fr'>
                     <input type="text" placeholder='First name' value={values.firstName} onBlur={handleBlur} id="firstName"
                     className={touched.firstName && errors.firstName ? "error_input register_form_input" : "register_form_input"}
@@ -62,29 +64,28 @@ const Register = () => {
                     <input type="text" placeholder='Last name' value={values.lastName} onBlur={handleBlur} id="lastName"
                     className={touched.lastName && errors.lastName ? "error_input register_form_input" : "register_form_input"}
                     onChange={handleChange} />
-                    <div className='fs'>{errors.lastName && <p className='error_input_message'>{errors.lastName}</p>}</div>
+                    
                 </div>
             
             <div className='fr'>
                 <input type="email" placeholder='Email' value={values.email} onBlur={handleBlur} id="email"
                  className={touched.email && errors.email ? "error_input form_input" : "register_form_input"} onChange={handleChange}
                  />
-                <div className='fs'>{errors.email && <p className='error_input_message'>{errors.email}</p>}</div>
+               
             </div>
             <div className='fr'>
                 <input type="password" placeholder="Password" id="password" onChange={handleChange} onBlur={handleBlur} 
                 className={touched.password && errors.password ? "error_input register_form_input" : "register_form_input"}/>
-                <div className='fs'>{errors.password && <p className='error_input_message'>{errors.password}</p>}</div>
+                
             </div>
             <div className='fr'>
                 <input type="password" placeholder='Confirm password' className='register_form_input' value={values.confirmPassword}
                 id="confirmPassword" onBlur={handleBlur} onChange={handleChange}/>
-                <div className='fs'>{errors.confirmPassword && <p className='error_input_message'>{errors.confirmPassword}</p>}</div>
+                
             </div>
             </div>
-
             <div className='register_form_footer'>
-                <button className='form_button'>Sign up</button>
+                <button className='form_button' type='submit'>Sign up</button>
                 <Link className='link' to="/">Already an user? Sign in!</Link>
             </div>
         </form>

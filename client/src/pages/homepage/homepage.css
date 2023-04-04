@@ -22,7 +22,7 @@
     top: 4rem;
     font-size: clamp(0.9rem, 1vw, 1rem);
     overflow: hidden;
-    z-index: 98;
+    z-index: 90;
 }
 
 .userinfo_top {
@@ -78,16 +78,17 @@
 
 .friends {
     width: 20.5rem;
-    height: 88vh;
+    height: 87vh;
     background-color: var(--secondary-dark);
     border-radius: 1rem;
     margin: 1rem;
     position: sticky;
     top: 4rem;
     list-style-type: none;
-    padding: 0 0.3rem;
+    padding: 0.5rem 0.3rem;
     z-index: 2;
     box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+    z-index: 90;
 }
 
 .friend {
@@ -131,6 +132,22 @@
     background-color: #383838;
     font-size: 1.4rem;
     z-index: 98;
+}
+
+.no_friends_message {
+    margin: 2rem;
+    text-align: center;
+    color: #7a7676;
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+
+.no_posts_message {
+    margin: 2rem;
+    text-align: center;
+    color: #7a7676;
+    font-weight: 600;
+    font-size: 1.1rem;
 }
 
 @media only screen and (max-width: 1400px) {

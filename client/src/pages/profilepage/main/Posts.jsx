@@ -4,9 +4,11 @@ import { useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import Post from '../../../components/post/postcomponent/Post';
 
-const Posts = ({userId}) => {
+const Posts = () => {
     const currentUser = useSelector(state => state);
-    const [posts, setPosts] = useState()
+    const location = useLocation()
+    const userId = location.pathname.split("/")[2];
+    const [posts, setPosts] = useState([])
 
     const getPosts = async () => {
         try {
@@ -19,15 +21,15 @@ const Posts = ({userId}) => {
   
     useEffect(() => {
         getPosts();
-    }, [])
+    }, [userId])
     
+    const array = posts?.map((item, index) => {
+        return <Post {...item} key={index}/>
+    })
+
     return (
     <div>
-        {
-            posts?.map((item, index) => {
-                return <Post {...item} key={index}/>
-            })
-        }
+        {array}
     </div>
   )
 }

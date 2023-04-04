@@ -5,6 +5,7 @@
     top: 0;
     left: 0;
     z-index: 100;
+    background: rgba(0 ,0 ,0, 0.5);
 }
 
 .add_profile_picture {
@@ -21,9 +22,13 @@
 
 .add_profile_picture_header {
     border-bottom: solid 1px #4b4b4b;
-    width: 98%;
-    height: 3rem;
-    font-size: clamp(1rem, 3vw, 1.5rem);
+    width: 96%;
+    padding: 0 2%;
+    height: clamp(2rem, 10vw, 2.5rem);
+    font-size: clamp(0.8rem, 3vw, 1.3rem);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .profile_picture_area {
@@ -32,6 +37,7 @@
     margin: 1rem 0;
     border-radius: 0.5rem;
     border: dashed 1px var(--blue-dark);
+    position: relative;
 }
 
 .profile_picture_preview {
@@ -43,9 +49,20 @@
     border: none;
 }
 
+.profile_picture_warning {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: clamp(0.75rem, 3vw, 1.1rem);
+    color: #7a7676;
+    z-index: 8;
+    text-align: center;
+}
+
 .add_profile_picture > button {
     width: 95%;
-    height: 2.5rem;
+    height: clamp(1.75rem, 10vw, 2.5rem);
     border-radius: 0.5rem;
     border: none;
     margin: 0.25rem 0;
@@ -61,22 +78,19 @@
 }
 
 .close_profile_picture {
-    position: absolute;
-    right: 0.5rem;
-    top: 0.5rem;
-    width: 2rem;
-    height: 2rem;
+    width: clamp(1.5rem, 10vw, 2rem);
+    height: clamp(1.5rem, 10vw, 2rem);
     background-color: #4b4b4b;
     border-radius: 50%;
     color: #fefefe;
     cursor: pointer;
-    font-size: clamp(0.85rem, 3vw, 1.3rem);
+    font-size: clamp(0.85rem, 3vw, 1.1rem);
     z-index: 98;
 }
 
 .add_picture_input {
     width: 95%;
-    height: 2.5rem;
+    height: clamp(1.75rem, 10vw, 2.5rem);
     border-radius: 0.5rem;
     z-index: 10;
     display: flex;
@@ -84,17 +98,17 @@
     align-items: center;
     cursor: pointer;
     z-index: 6;
-    font-size: clamp(0.85rem, 3vw, 1.3rem);
+    font-size: clamp(0.85rem, 3vw, 1.1rem);
 }
 
 .profile_picture_file_input {
     width: 95%;
-    height: 2.5rem;
+    height: clamp(1.75rem, 10vw, 2.5rem);
     border-radius: 0.5rem;
     border: none;
     margin: 0rem 0;
     color: #fefefe;
-    font-size: clamp(0.85rem, 3vw, 1.3rem);
+    font-size: clamp(0.85rem, 3vw, 1.1rem);
     cursor: pointer;
     background-color: #383838;
     overflow: hidden;
