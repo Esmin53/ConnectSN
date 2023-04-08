@@ -39,6 +39,7 @@ const Profilepicture = () => {
 
     const uploadImage = () => {
       setIsUploading(true)
+        if(currentUser.user.profilePicture !== defaultUrl) deleteImage(currentUser.user.profilePicture)
         if(imageUpload === null) return;
         const imageRef = ref(storage, `images/${imageUpload.name + v4()}`);
         uploadBytes(imageRef, imageUpload).then((

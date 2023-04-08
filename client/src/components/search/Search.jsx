@@ -33,7 +33,7 @@ const Search = () => {
          
         <div className={`${isSearchBarOpen ? "search_focused" : "search"}`}
             ref={ref}> 
-            <div className='center'>
+            <div className='center' >
                 <input value={search} onChange={(e) => {
                     setSearch(e.target.value)
                     searchBar()}}  onClick={() => setIsSearchBarOpen(true)}
@@ -47,15 +47,16 @@ const Search = () => {
             </div>}
                
             </div>
-                {search.length === 0 && <p className='search_placeholder'> <span id='search_display_none'>Search...</span> <FaSearch /> </p>}
+                {search.length === 0 && <p className='search_placeholder' 
+                onClick={() => setIsSearchBarOpen(true)}> <span id='search_display_none'>Search...</span> <FaSearch /> </p>}
                 <div className='search_results'>
                     {search == "" && <p className='no_results_message'>Connect with people!</p>}
                     {search !== "" && searchResults?.length === 0 && <p className='no_results_message'>No Results</p>}
                     {searchResults.map((item, index) => {
-                        if(index === 3) {
+                        if(index === 5) {
                             return <Allresults results={searchResults} search={search}/>
                         }
-                        if(index < 3) {
+                        if(index < 5) {
                         return <div className='search_result' key={item._id} onClick={() => navigate(`/navigate/${item._id}`)}>
                             <img className='profile_picture' src={item.profilePicture} />
                         <div className='search_result_info'>

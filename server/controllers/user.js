@@ -219,20 +219,22 @@ const removeFriend = async (req, res) => {
     try {
         const {userId} = req.user;
         const {friendId} = req.params;
-        console.log("Radi")
 
-        const user = await User.findById({_id: userId});
-        const friend = await User.findById({_id: friendId});
+        const user = await User.findById({_id: userId}).select(['-password']);
+        const friend = await User.findById({_id: friendId}).select(['-password']);
+
+        let userFriends = user.friends
+        let friendFriends = friend.friends
 
         if(user.friends.includes(friendId)) {
-            user.friends = user.friends.filter(id => id != friend._id);
-            friend.friends = friend.friends.filter(id => id != user._id);
+            userFriends = user.friends.filter(id => id != friendId);
+            friendFriends = friend.friends.filter(id => id != userId);
         } 
 
-        await user.save();
-        await friend.save();
-        
-        res.status(200).json(user.friends);
+        await User.findByIdAndUpdate(user._id, {friends: userFriends}, {new: true});
+        await User.findByIdAndUpdate(friend._id, {friends: friendFriends}, {new: true});
+  
+        res.status(200).json(userFriends);
     } catch (error) {
         return res.status(401).json({ msg: error.message });
     }
@@ -253,7 +255,6 @@ const getFriends = async (req, res) => {
     try {
         const {userId} = req.params
         const user = await User.findById({_id: userId});
-
         const friends = await User.find({
             '_id': {
                 $in: user.friends
@@ -266,6 +267,20 @@ const getFriends = async (req, res) => {
     }
 }
 
+const stream = async (req, res) => {
+    try {
+        const {userId} = req.user;
+
+       const user = await User.findById(userId).select(['-password', '-email', '-firstName', '-lastName', '-location', '-occupation',
+            '-instagram', '-facebook', '-createdAt']);
+
+       res.status(200).json({ friends: user.friends, sentRequests: user.sentRequests, recievedRequests: user.recievedRequests})
+    } catch (error) {
+        console.log(error) 
+        res.status(400).json({ msg: error})
+    }
+}
+
 module.exports = {search, sendRemoveRequest, acceptDeclineRequest, removeFriend,
                  getUser, searchUsers, getAllUsers, getRequests, getFriends, updateUser,
-                getUserLight, getRecommendedUsers, statistics};
+                getUserLight, getRecommendedUsers, statistics, stream};

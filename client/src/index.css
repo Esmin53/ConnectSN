@@ -1,6 +1,7 @@
 :root {
   --blue: #2d69a1;
   --blue-dark: #145DA0;
+  --red: #CF4545;
   --primary-light: #F5F5F5;
   --secondary-light: #fefefe;
   --primary-dark: #18191A;
@@ -113,7 +114,6 @@ input::file-selector-button:hover {
     width: 2.5rem;
     border-radius: 50%;
     overflow: hidden;
-    background-color: #121213;
 }
 
 @media only screen and (max-width: 312px) {

@@ -45,7 +45,7 @@
 
 .register_form_input:focus {
     outline: none;
-    border: solid 1.5px #145DA0;
+    box-shadow: 1px 0 4px 1px var(--blue-dark);
 }
 
 .register_form_image {

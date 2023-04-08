@@ -2,6 +2,7 @@
     position: absolute;
     top: 0.25rem;
     left: 7.25rem;
+    z-index: 99;
 }
 
 .search {
@@ -21,7 +22,7 @@
 }
 
 .searchbar {
-    width: 14.3rem;
+    width: clamp(5rem, 45vw, 14.3rem);
     height: 2.3rem;
     min-height: 2.3rem;
     border: none;
@@ -30,7 +31,10 @@
     background-color: #383838;
     color: #f3f3f3;
     outline: none;
+}
 
+.searchbar:focus {
+    box-shadow: 0 0 3px 1px var(--blue-dark);
 }
 
 .search_placeholder {
@@ -49,7 +53,7 @@
     position: absolute;
     top: 0.1rem;
     z-index: 95;
-    left: 15.25rem;
+    left: clamp(5.5rem, 50vw, 15.25rem);
 }
 
 .search_focused {
@@ -122,7 +126,6 @@
         z-index: 99;
         max-height: 100vh;
         border-radius: 0;
-        background-color: red;
     }
 
     .search_focused {
@@ -130,6 +133,7 @@
         height: 100vh;
         padding-left: 2%;
     }
+
 
     .search_focused > .searchbar {
         width: clamp(10rem, 75vw, 24rem);
@@ -146,5 +150,13 @@
     .search_placeholder {
         margin-top: -1.9rem;
         margin-left: 0.35rem;
+    }
+
+    .searchbar {
+        width: 83vw;
+    }
+
+    .close_searchbar {
+        left: 86vw;
     }
 }

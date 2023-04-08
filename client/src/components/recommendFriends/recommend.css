@@ -18,6 +18,7 @@
     font-size: 1rem;
     color: #f3fef3;
     transition: 150ms ease-in-out;
+    opacity: 0.7;
 }
 
 .scroll_button:hover {
@@ -47,6 +48,7 @@
     overscroll-behavior-inline: contain;
     position: relative;
     scroll-behavior: smooth;
+    scroll-snap-align: center;
 }
 
 .recommend_friends_container::-webkit-scrollbar {

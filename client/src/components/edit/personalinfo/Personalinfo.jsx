@@ -36,8 +36,6 @@ const Personalinfo = () => {
     })
   }
 
-  console.log(page)
-
   const updateUser = async (e) => {
       e.preventDefault()
       setIsLoading(true)  

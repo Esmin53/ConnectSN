@@ -4,6 +4,7 @@ import { Link, useLocation } from 'react-router-dom';
 import "./friends.css"
 import axios from "axios"
 import {AiOutlineArrowLeft} from "react-icons/ai"
+import Navbar from "../../components/Navbar"
 
 const Friends = () => {
   const currentUser = useSelector(state => state); 
@@ -33,11 +34,12 @@ const Friends = () => {
   return (
     <div className='friends_page_container'>
     <div className='friends_page_header'>
-        My Friends
+        Friends
         <Link to={`/profile/${userId}`} className='exit_friends_page center'>
             <AiOutlineArrowLeft />
         </Link>
     </div>
+    <div className='friends_page_friends'>
         {friends?.map((item, index) => {
             return <div key={index} className="friends_page_item"> 
                 <Link to={`/profile/${item._id}`} className="friends_page_profile_picture">
@@ -45,7 +47,9 @@ const Friends = () => {
                 </Link>
                 <p className='profile_page_friend_name'>{item.firstName} {item.lastName}</p>
             </div>
+          
         })}
+          </div>
     </div>
   )
 }

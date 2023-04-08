@@ -5,32 +5,25 @@ import {FaUserClock, FaUserMinus, FaUserPlus} from "react-icons/fa"
 import {useDispatch, useSelector} from "react-redux";
 import { updateSentRequests } from '../../redux/rootSlice';
 import { useNavigate } from 'react-router-dom';
+import HpfriendsSkeleton from '../../components/loading/skeletons/HpfriendsSkeleton';
 
 const Friends = () => {
-  const [users, setUsers] = useState();
   const [friends, setFriends] = useState();
   const currentUser = useSelector(state => state)
   const dispatch = useDispatch();
   const navigate = useNavigate()
-
-  const fetchAllUsers = async () => {
-    try {
-      const res = await axios.get("http://localhost:3001/api/v1/user/getAllUsers") 
-      setUsers(res.data)
-    } catch (error) {
-      console.log(error)
-    }
-  }
+  const [isFetching, setIsFetching] = useState(true)
 
   const getFriends = async () => {
+    setIsFetching(true)
     try {
       const res = await axios.get(`http://localhost:3001/api/v1/user/getFriends/${currentUser.user._id}`,  {
         headers: {
           Authorization: `Bearer ${currentUser.token}`
         }
       }) 
-      console.log(res.data)
       setFriends(res.data)
+      setIsFetching(false)
     } catch (error) {
       console.log(error)
     }
@@ -54,12 +47,11 @@ const Friends = () => {
 
   useEffect(() => {
     getFriends();
-    fetchAllUsers();
   }, [])
 
-  useEffect(() => {
-    getFriends();
-  }, [currentUser.user.friends])
+  if(isFetching) {
+    return <HpfriendsSkeleton />
+  }
 
   return (
     <ul className='friends'>

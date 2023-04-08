@@ -9,6 +9,7 @@ import {BsThreeDots}  from "react-icons/bs"
 import deleteImage from "../../../deleteImage"
 import { relativetime } from './relativetime'
 import Comments from './comments/Comments'
+import SkeletonPost from '../../loading/skeletons/SkeletonPost'
 
 const commentRegex =  /^\s*$/
 
@@ -20,8 +21,10 @@ const Post = ({image, text, authorId, likes, _id, createdAt, comments}) => {
     const [commentsArray, setCommentsArray] = useState(comments)
     const [isDropdownOpen, setIsDropdownOpen] = useState(false)
     const [error, setError] = useState(false)
+    const [isFetching, setIsFetching] = useState(true)
 
     const getAuthorInfo = async () => {
+        setIsFetching(true)
         try {
       const res = await axios.get(`http://localhost:3001/api/v1/user/light/${authorId}`, {
         headers: {
@@ -29,6 +32,7 @@ const Post = ({image, text, authorId, likes, _id, createdAt, comments}) => {
         }
       })
         setAuthor(res.data)
+        setIsFetching(false)
         } catch (error) {
             console.log(error)   
         }
@@ -94,6 +98,10 @@ const Post = ({image, text, authorId, likes, _id, createdAt, comments}) => {
 
     const timestamp = relativetime(createdAt)
 
+    if(isFetching) {
+        return <SkeletonPost />
+    }
+
     return (
     <div className='post_container'>
         <div className='post_header'>
@@ -102,16 +110,16 @@ const Post = ({image, text, authorId, likes, _id, createdAt, comments}) => {
                     <img className='profile_picture' src={author.profilePicture} alt="Author profile picture" />
                 </Link>
                 <div id="post_header_info">
-                <Link to={`/navigate/${authorId}`} className="Link">{author.firstName} {author.lastName}</Link>
-                <p style={{fontSize: "0.8rem"}}>{timestamp}</p>
-            </div>
-            {currentUser.user._id === authorId && <div className='post_author_options center'>
+                    <Link to={`/navigate/${authorId}`} className="Link">{author.firstName} {author.lastName}</Link>
+                    <p style={{fontSize: "0.8rem"}}>{timestamp}</p>
+                </div>
+                {currentUser.user._id === authorId && <div className='post_author_options center'>
                 <BsThreeDots  onClick={() => setIsDropdownOpen(prev => !prev)}/>
                 {isDropdownOpen && <ul className='dropdown' id='post_options_dropdown'>
-                        <li className='settings center'><AiFillEdit /> Edit</li>
-                        <li className='settings center' onClick={() => deletePost()}><AiFillDelete /> Delete</li>                    
-                    </ul>}
-            </div>}
+                    <li className='settings center'><AiFillEdit /> Edit</li>
+                    <li className='settings center' onClick={() => deletePost()}><AiFillDelete /> Delete</li>                    
+                </ul>}
+                </div>}
             </div>
             <p className='post_text_content'>{text}</p>
         </div>
@@ -134,10 +142,10 @@ const Post = ({image, text, authorId, likes, _id, createdAt, comments}) => {
                 <img className='profile_picture' src={currentUser.user.profilePicture} />
                 <textarea type="text" className={`post_new_comment_input ${error && "post_new_comment_error"}`} value={comment} 
                 onChange={(e) => {
-                    error && setError(null)
-                    setComment(e.target.value)}} placeholder="Add a comment..." /> 
+                error && setError(null)
+                setComment(e.target.value)}} placeholder="Add a comment..." /> 
             </div>
-                <Comments comments={commentsArray} />
+            <Comments comments={commentsArray} />
         </div> 
     </div>
   )

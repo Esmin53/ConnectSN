@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const {verifyTokenAndUser, verifyToken} = require("../middleware/authorization");
 const {sendRemoveRequest, acceptDeclineRequest, removeFriend, getFriends, 
-    getUser, getAllUsers, getRequests, updateUser, getUserLight, search, getRecommendedUsers, statistics} = require("../controllers/user");
+    getUser, getAllUsers, getRequests, updateUser, getUserLight, search, getRecommendedUsers, statistics, stream} = require("../controllers/user");
 
 //READ (GET) ROUTES
 router.get("/info/:userId",verifyToken, getUser); // See single user
@@ -23,5 +23,7 @@ router.patch("/update", verifyToken, updateUser)
 
 // DELETE ROUTES
 router.delete("/remove/:friendId", verifyToken, removeFriend); // Remove user from friends list
+
+router.get("/stream",verifyToken, stream)
 
 module.exports = router;

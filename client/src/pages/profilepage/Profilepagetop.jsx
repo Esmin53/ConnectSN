@@ -7,8 +7,9 @@ import axios from 'axios';
 import Profilepicture from '../../components/edit/profilepicture/Profilepicture';
 import Background from '../../components/edit/backgroundimage/Background';
 import Personalinfo from '../../components/edit/personalinfo/Personalinfo';
-import { updateFriends, updateSentRequests } from '../../redux/rootSlice';
+import { updateFriends, updateSentRequests, updateRequsets } from '../../redux/rootSlice';
 import { FaUserClock, FaUserPlus } from 'react-icons/fa';
+import Loading from '../../components/loading/Loading';
 
 const Profilepagetop = () => {
   const location = useLocation();
@@ -57,25 +58,35 @@ const Profilepagetop = () => {
         }
       })
       dispatch(updateFriends(res.data))
-      console.log(res.data)
     } catch (error) {
       console.log(error)
     }
   }
-  
+
+  const responseRequest = async () => {
+    try {
+        const res = await axios.post("http://localhost:3001/api/v1/user/answerRequest", {
+            friendId: userId,
+            response: true
+        }, {
+            headers: {
+                Authorization: `Bearer ${currentUser.token}`
+            }
+        })
+        dispatch(updateFriends(res.data.friends))
+        dispatch(updateRequsets(res.data.recievedRequests))
+        //getRequests();
+    } catch (error) {
+       console.log(error.response.data)
+    }
+}
+
   useEffect(() => {
     getUser()
-  }, [userId])
+  }, [currentUser.user])
   
-  if(isFetching && !user) {
-    return <div className='profile_page_container'>
-      <div className='profile_page_top'>
-        <div className='background'></div>
-        <div className='profile_page_info'>
-          <div className='main_profile_picture'></div>
-        </div>
-      </div>
-    </div>
+  if(!user) {
+    return <Loading />
   }
   
   return (
@@ -104,12 +115,32 @@ const Profilepagetop = () => {
               {userId !== currentUser?.user?._id && <div> 
                 {currentUser.user.friends.includes(userId) ? 
                 <button className='profile_page_friend_button center' onClick={() => setIsRemoveFriendOpen(prev => !prev)}
-                >Friends <MdKeyboardArrowDown />
-                {isRemoveFriendOpen && <div className='remove_friend_dropdown' onClick={removeFriend}>Remove friend</div>}
+                >Remove friend
+                {isRemoveFriendOpen && 
+                  <div className='dropdown' id='remove_friend_dropdown'>
+                    <p className='friend_button_text'>Are you sure you want to remove {user?.firstName} from friends?</p>
+                    <p className='friend_button_options'>
+                      <button onClick={removeFriend}>Yes</button>
+                      <button id='delete_button'>No</button>
+                    </p>
+                  </div>
+                }
                 </button> : 
-                <button className='profile_page_friend_button center' onClick={() => addFriend(userId)}>
-                  {currentUser?.user?.sentRequests?.includes(userId) ? <span>Sent <FaUserClock /></span> :
-                   <span>Send request <FaUserPlus /></span>}  
+                <button className='profile_page_friend_button center'>
+                  {currentUser?.user?.sentRequests?.includes(userId) ? <span onClick={() => setIsRemoveFriendOpen(prev => !prev)}>
+                    Sent <FaUserClock /> 
+                      {isRemoveFriendOpen && <div className='dropdown' id='remove_friend_dropdown'>
+                      <p className='friend_button_text'>Cancle friend request?</p>
+                    <p className='friend_button_options'>
+                      <button onClick={() => addFriend(userId)}>Yes</button>
+                      <button id='delete_button'>No</button>
+                    </p>
+                      </div>}
+                    </span> :<span>
+                    { currentUser?.user.recievedRequests?.includes(userId) ?
+                    <span onClick={responseRequest}> Accept <FaUserClock /></span> :
+                    <span onClick={() => addFriend(userId)}>Send request <FaUserPlus /></span>}
+                    </span>}
                 </button>}  
               </div>}
             </div>   

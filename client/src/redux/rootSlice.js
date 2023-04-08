@@ -18,15 +18,12 @@ export const rootSlice = createSlice({
         logout: (state) => {
             state.token = null;
             state.user = null;
-            console.log(state.user);
         },
         updateFriends: (state, action) => {
             state.user.friends = action.payload;
         },
         updateRequsets: (state, action) => {
-            console.log(action.payload)
             state.user.recievedRequests = action.payload;
-            console.log(state.user.recievedRequests)
         },
         updateSentRequests: (state, action) => {
             state.user.sentRequests = action.payload;

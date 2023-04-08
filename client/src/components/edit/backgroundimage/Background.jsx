@@ -36,6 +36,7 @@ const Background = () => {
     }
 
     const uploadImage = () => {
+        currentUser?.user?.backgroundImage && deleteImage(currentUser?.user?.backgroundImage)
         setIsUploading(true)
          const imageRef = ref(storage, `images/${imageUpload.name + v4()}`);
         uploadBytes(imageRef, imageUpload).then((

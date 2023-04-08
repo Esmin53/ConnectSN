@@ -10,10 +10,10 @@ const Userinfo = ({user}) => {
       <h2>About me</h2>
       <p>
         <RiHome2Fill />
-        Location: {user.location || "Not provided"}</p>
+        Lives in <span style={{fontWeight: "600"}}>{user.location || "Not provided"}</span></p>
       <p>
         <MdWork />
-        Occupation: {user.occupation || "Not provided"}</p>
+        Works as <span style={{fontWeight: "600"}}>{user.occupation || "Not provided"}</span></p>
       <h2>Socials</h2>
       <p><FaInstagram /> @{user.instagram || "Not provided"}</p>
       <p> <FaFacebookF /> {user.facebook || "Not provided"}</p>

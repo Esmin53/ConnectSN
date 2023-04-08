@@ -9,6 +9,7 @@ const PORT = process.env.PORT || 6001;
 const authRouter = require("./routes/auth");
 const userRouter = require("./routes/user");
 const postRouter = require("./routes/post");
+const { stream } = require("./controllers/user");
 
 const app = express();
 
@@ -21,6 +22,10 @@ app.use(express.json());
 app.use('/api/v1/auth', authRouter);
 app.use('/api/v1/user', userRouter);
 app.use('/api/v1/post', postRouter);
+
+app.get("/", (req, res) => {
+    res.send("Hello")
+})
 
 const start = () => {
     connectdb(process.env.MONGO_URI).then(() => {

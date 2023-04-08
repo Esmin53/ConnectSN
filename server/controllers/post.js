@@ -29,15 +29,20 @@ const getUsersPosts = async (req, res) => {
 const getHomepage = async (req, res) => {
     try {
         const {userId} = req.user;
+        const {pagenum} = req.query;
         const user = await User.findById(userId)
+
+        const count = await Post.count({'authorId': {
+            $in: user.friends
+        }})
 
          const posts = await Post.find({
             'authorId': {
                 $in: user.friends
             }
-        }).sort({ createdAt: -1})
+        }).sort({ createdAt: -1}).limit(pagenum * 10)
 
-        res.status(200).json(posts)
+        res.status(200).json({posts, count})
 
     } catch (error) {
         res.status(400).json({ msg: error})

@@ -25,7 +25,6 @@ const Profilepagemain = () => {
       })
       setUser(res.data)
       setIsFetching(false)
-      console.log(res.data)
     } catch (error) {
       console.log(error);
     }

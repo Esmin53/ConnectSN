@@ -22,8 +22,8 @@ const Navbar = () => {
 
     const handleLogout = () => {
         navigate("/");
+        localStorage.clear();
         dispatch(logout());
-        localStorage.clear()
     }
     
     const getRequests = async () => {
@@ -90,21 +90,22 @@ const Navbar = () => {
                     setOpenRequests(prev => !openRequests)
                 }}>
                 <FaBell  />
-                {openRequests && <ul className='dropdown' id='requests_dropdown'>
+                {currentUser?.user?.recievedRequests?.length > 0 && <span className='notifications_counter center'>
+                    {currentUser?.user?.recievedRequests?.length }
+                </span>}
+                {openRequests && <ul id='requests_dropdown' className='dropdown'>
                     {requests.map((item, index) => {
                         return <li className='navbar_request' key={index}>
-                        <div className='profile_picture_container'>
+                        <div className='navbar_request_info'>
                             <img className='profile_picture' src={item.profilePicture} />
-                        </div>
-                        <div className='request_info'>
                             <p>{item.firstName} {item.lastName} sent you a friend request</p>
-                            <div className='request_buttons'>
-                                <button className='request_button' style={{background: "#145DA0"}}
-                                onClick={() => responseRequest(true, item._id)}>Accept</button>
-                                <button className='request_button' style={{background: "#383838"}}
-                                onClick={() => responseRequest(false, item._id)}>Delete</button>
-                            </div>
                         </div>
+                        <div className='navbar_request_buttons'>
+                            <button className='request_button' style={{background: "#145DA0"}}
+                            onClick={() => responseRequest(true, item._id)}>Accept</button>
+                            <button className='request_button' style={{background: "#383838"}}
+                            onClick={() => responseRequest(false, item._id)}>Delete</button>
+                        </div>                    
                     </li>
                     })}
                     {requests.length === 0 && <p className='navbar_request'>No new requests at the time</p>}

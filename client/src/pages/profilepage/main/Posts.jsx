@@ -21,15 +21,13 @@ const Posts = () => {
   
     useEffect(() => {
         getPosts();
-    }, [userId])
-    
-    const array = posts?.map((item, index) => {
-        return <Post {...item} key={index}/>
-    })
+    }, [currentUser.user])
 
     return (
     <div>
-        {array}
+        {posts?.map((item, index) => {
+        return <Post {...item} key={index}/>
+    })}
     </div>
   )
 }

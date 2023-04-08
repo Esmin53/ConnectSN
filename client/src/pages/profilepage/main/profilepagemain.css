@@ -84,7 +84,7 @@
 }
 
 #profile_header_friends {
-    font-size: clamp(1.15rem , 5vw, 1.75rem);
+    font-size: clamp(1rem, 5vw, 1.5rem);
 }
 
 #profile_header_p {

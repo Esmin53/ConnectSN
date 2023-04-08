@@ -71,6 +71,11 @@
     font-size: 1.5rem;
     border: none;
     cursor: pointer;
+    color: #000;
+}
+
+#add_background_text {
+    color: #000;
 }
 
 .profile_page_info {
@@ -136,18 +141,57 @@
     transition: 200ms ease-in-out;
 }
 
-.remove_friend_dropdown {
+.profile_page_friend_button:hover {
+    background-color: var(--blue);
+}
+
+#remove_friend_dropdown {
     width: 100%;
     height: 2rem;
+    width: 14rem;
+    min-width: 0;
     position: absolute;
     top: 2.2rem;
-    left: 0;
-    background-color: #383838;
-    border: none;
+    right: 0rem;
+    background-color: var(--secondary-dark);
     border-radius: 0.5rem;
     display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: space-evenly;
+}
+
+.friend_button_text {
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.friend_button_options {
+    display: flex;
+    justify-content: space-evenly;
+    width: 100%;
+    margin-top: 0.75rem;
+}
+
+#delete_button {
+    background-color: rgb(192, 32, 32);
+}
+
+#delete_button:hover {
+    background-color: rgb(218, 40, 40);
+}
+
+.friend_button_options > button {
+    width: 6rem;
+    height: 1.75rem;
+    color: #fef3fd;
+    background-color: var(--blue-dark);
+    border: none;
+    border-radius: 0.25rem;
+    cursor: pointer;
+}
+
+.friend_button_options >button:hover {
+    background-color: var(--blue);
 }
 
 .remove_friend_dropdown:hover {

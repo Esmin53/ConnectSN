@@ -42,6 +42,18 @@
     cursor: pointer;
 }
 
+.notifications_counter {
+    width: 1.05rem;
+    height: 1.05rem;
+    font-size: 0.75rem;
+    border-radius: 50%;
+    background-color: var(--red);
+    position: absolute;
+    right: -0.5rem;
+    bottom: 0rem;
+    font-weight: 600;
+}
+
 .dropdown {
     list-style-type: none;
     position: absolute;
@@ -59,13 +71,17 @@
     font-size: clamp(0.9rem, 4vw, 1.1rem);
     gap: 0.25rem;
     z-index: 3;
-    padding: 0.5rem 0.25rem;
+    padding: 0.25rem 0.25rem 0rem 0.24rem;
+}
+
+#requests_dropdown {
+    width: 20rem;
+    justify-content: center;
 }
 
 .navbar_request {
-    width: 20rem;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     font-size: 0.9rem;
     gap: 0.5rem;
     border-radius: 0.5rem;
@@ -76,23 +92,23 @@
     background-color: #4b4b4b;
 }
 
-.request_info {
-    flex: 1;
+.navbar_request_info {
     display: flex;
-    flex-direction: column;
+    font-size: clamp(0.75rem, 4vw, 1rem);
+    gap: 0.25rem;
+    width: 100%;
 }
 
-.request_buttons {
+.navbar_request_buttons{
     width: 100%;
     display: flex;
-    gap: 1rem;
     justify-content: center;
+    gap: 1rem;
 }
 
 .request_button {
     width: 5.25rem;
-    height: 2rem;
-    margin: 0.5rem 0;
+    height: 1.75rem;
     border: none;
     cursor: pointer;
     border-radius: 0.5rem;
@@ -101,7 +117,7 @@
 }
 
 .request_button:hover {
-    transform: scale(1.05);
+    transform: scale(1.025);
     transition: 150ms ease-in-out;
 }
 
@@ -137,6 +153,10 @@
         height: clamp(2.1rem, 9vw, 2.25rem);
         font-size: clamp(1.15rem, 9vw, 1.5rem);
     }
+
+    .notifications_counter {
+        right: -0.1rem;
+    }
 }
 
 @media only screen and (max-width: 600px) {
@@ -160,10 +180,12 @@
         margin-top: 0.25rem;
         height: 2.25rem;
     }
+
     #requests_dropdown{
         right: -20vw;
         width: 80vw;
         font-size: clamp(0.75rem, 4vw, 1.1rem);
+        min-width: 1rem;
     }
 
     .dropdown {
@@ -176,5 +198,11 @@
 
     .logo {
         font-size: clamp(1rem, 5vw, 1.5rem)
+    }
+
+    .request_button {
+        width: clamp(4rem, 14vw, 5.25rem);
+        height: clamp(1.5rem, 7vw, 1.75rem);
+        font-size: clamp(0.7rem, 3vw, 1rem);
     }
 }

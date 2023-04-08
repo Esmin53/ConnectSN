@@ -4,7 +4,6 @@ import {FaUserClock, FaUserPlus} from "react-icons/fa"
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from 'react-icons/ai'
 import axios from 'axios'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
 import {MdHome, MdWork} from "react-icons/md"
 import { updateFriends, updateRequsets, updateSentRequests } from '../../redux/rootSlice'
 import Personalinfo from '../edit/personalinfo/Personalinfo'
@@ -13,8 +12,8 @@ const Recommend = () => {
   const currentUser = useSelector(state => state)
   const [users, setUsers] = useState()
   const dispatch = useDispatch()
-  const url = `http://localhost:3001/api/v1/user/recomendations?occupation=${currentUser?.user?.occupation}&location=${currentUser.user.location}&&id=${currentUser.user._id}`
-      
+  const url = `http://localhost:3001/api/v1/user/recomendations?occupation=${currentUser?.user?.occupation}&location=${currentUser.user.location}&&id=${currentUser.user._id}` 
+
     const getRecomendations = async () => {
         try {
           const res = await axios.get(url,  {
@@ -56,7 +55,6 @@ const Recommend = () => {
             })
             dispatch(updateFriends(res.data.friends))
             dispatch(updateRequsets(res.data.recievedRequests))
-            //getRequests();
         } catch (error) {
            console.log(error.response.data)
         }
@@ -74,8 +72,6 @@ const Recommend = () => {
         let scrollContainer = document.getElementById("scroll_conatiner")
         scrollContainer.scrollLeft = scrollContainer.scrollLeft - 130
         }
-      
-    
   
     return ( 
     <div className='scroll_container' style={{zIndex: "5"}}>
